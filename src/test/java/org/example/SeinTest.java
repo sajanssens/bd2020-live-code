@@ -30,6 +30,6 @@ public class SeinTest {
     public void whenSnelheidIsHighThenSeinIsRood() {
         int snelheid = 135;
         String antwoord = bepaalKleur(snelheid);
-        assertEquals("rood", antwoord );
+        assertEquals("rood", antwoord);
     }
 }
