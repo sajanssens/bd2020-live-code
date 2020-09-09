@@ -28,7 +28,8 @@ public class SeinTest {
 
     @Test
     public void whenSnelheidIsHighThenSeinIsRood() {
-        String antwoord = bepaalKleur(135);
+        int snelheid = 135;
+        String antwoord = bepaalKleur(snelheid);
         assertEquals("rood", antwoord );
     }
 }
