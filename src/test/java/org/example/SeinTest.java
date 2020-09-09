@@ -21,7 +21,8 @@ public class SeinTest {
 
     @Test
     public void whenSnelheidIsMediumThenSeinIsOranje() {
-        String antwoord = bepaalKleur(45);
+        int snelheid = 29;
+        String antwoord = bepaalKleur(snelheid);
         assertEquals("oranje", antwoord);
     }
 
