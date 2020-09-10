@@ -1,9 +1,9 @@
 package org.example;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import static java.lang.Math.sqrt;
+import org.example.h3.Employee;
+import org.example.h3.Sein;
+import org.example.h3.SeinKleur;
+import org.example.h4.Loops;
 
 /**
  * Dit is mijn eerste demo. ...
@@ -14,8 +14,6 @@ import static java.lang.Math.sqrt;
  */
 public class Start {
 
-    static Logger log = LoggerFactory.getLogger("mijnLogger");
-
     /**
      * Dit is het startpunt van mijn applicatie.
      * ...
@@ -23,14 +21,21 @@ public class Start {
      * @param args de commandline argumenten
      */
     public static void main(String[] args) {
-        String s = "";
+        // Sein.demoOperators();
 
-        System.out.println("hier gebeurt iets..." + args[0]);
+        // create object:
+        Employee bram;
+        bram = new Employee();
+        bram.firstname = "Bram";
+        bram.lastname = "Janssens";
+        bram.age = 41;
 
-        // trek de wortel uit twee:
-        double wortelTwee = sqrt(2);
+        SeinKleur seinKleur = Sein.bepaalKleur(25);
+        System.out.println(seinKleur);
 
-        System.out.println(/*dit is de parameter: */ wortelTwee);
+        Sein.demoInitieleWaarde();
+
+        Loops.loopsDemo();
     }
 
 }
