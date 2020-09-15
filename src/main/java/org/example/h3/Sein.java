@@ -25,13 +25,12 @@ public class Sein {
         return kleur;
     }
 
-    public static String demoInitieleWaarde() {
+    public static void demoInitieleWaarde() {
         System.out.println(aantalLampen);
         System.out.println(aantalLampen2);
         System.out.println(test);
         System.out.println(kar);
         System.out.println(classScopeKleur);
-        return "XYZ!";
     }
 
 }
