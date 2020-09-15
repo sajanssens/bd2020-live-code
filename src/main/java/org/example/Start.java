@@ -30,7 +30,8 @@ public class Start {
         bram.lastname = "Janssens";
         bram.age = 41;
 
-        SeinKleur seinKleur = Sein.bepaalKleur(25);
+        Sein sein = new Sein();
+        SeinKleur seinKleur = sein.bepaalKleur(25);
         System.out.println(seinKleur);
 
         Sein.demoInitieleWaarde();

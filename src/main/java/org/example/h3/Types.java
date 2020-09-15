@@ -3,6 +3,7 @@ package org.example.h3;
 public class Types {
 
     public void doeIets() {
+
         char letter = 'a'; // literal
         boolean isDitWaar = false; // boolean literal
         System.out.println((char) (letter - 26));

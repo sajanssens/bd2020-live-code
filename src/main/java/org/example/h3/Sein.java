@@ -9,15 +9,17 @@ public class Sein {
     static boolean test;
     static char kar;
 
-    public static SeinKleur bepaalKleur(int snelheid) {
+    public SeinKleur bepaalKleur(int snelheid) {
         SeinKleur kleur;
 
-        if (snelheid <= 30) {
+        if (snelheid > 0 && snelheid <= 30) {
             kleur = SeinKleur.GROEN;
         } else if (snelheid <= 50) {
             kleur = SeinKleur.ORANJE;
-        } else {
+        } else if (snelheid <= 120) {
             kleur = SeinKleur.ROOD;
+        } else {
+            kleur = SeinKleur.UNKNOWN;
         }
 
         return kleur;
