@@ -17,6 +17,8 @@ public class Start {
 
         seinKleur = seinBijApeldoorn.bepaalKleur(-10);
         System.out.println(seinKleur);
+
+        DubbeleLus.voerUit();
     }
 
 }

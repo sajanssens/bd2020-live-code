@@ -16,9 +16,6 @@ public class Start {
 
         double average = rekenmachine.average(1, 2, 3);
         System.out.println(average);
-
-        double average2 = rekenmachine.average2(new int[]{1, 2, 3});
-        System.out.println(average2);
     }
 
 }
