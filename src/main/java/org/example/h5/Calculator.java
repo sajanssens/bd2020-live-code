@@ -11,6 +11,15 @@ public class Calculator {
         x.inhoud++;
     }
 
+    public void addOne(Integer i) {
+        i++;
+    }
+
+    public void addOne(String s) {
+        s = s + "1";
+        System.out.println(s);
+    }
+
     public double average(int... values) {
         float sum = 0;
         for (int value : values) {
