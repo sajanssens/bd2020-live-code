@@ -3,11 +3,11 @@ package org.example.h7;
 public class Start {
 
     public static void main(String[] args) {
-        Person bram = new Person();
+        Person bram = new Person("Janssens");
         Person bas = new Person();
         Person bart = new Person();
 
-        bram.setLastName("Janssens");
+        // bram.setLastName("Janssens");
         // bram.age = -1;
         // bram.setAge(-1);
         bram.setAge(41);

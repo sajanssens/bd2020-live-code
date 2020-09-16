@@ -16,8 +16,12 @@ public class Person {
     // ------------------------------
 
     // default ctor:
-    public /* - */ Person() {
-        // ...
+    public /*Person*/ Person() {
+        // return new person
+    }
+
+    public Person(String name) {
+        this.lastName = name;
     }
 
     public static boolean hasBirthday() {
