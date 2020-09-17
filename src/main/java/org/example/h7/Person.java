@@ -16,12 +16,22 @@ public class Person {
     // ------------------------------
 
     // default ctor:
-    public /*Person*/ Person() {
-        // return new person
+    public Person() {
+        this("onbekend");
     }
 
     public Person(String name) {
-        this.lastName = name;
+        this(name, -1);
+    }
+
+    public Person(String name, int age) {
+        this(name, age, -100);
+    }
+
+    public Person(String name, int age, int shoeSize) {
+        setLastName(name);
+        setAge(age);
+        setShoeSize(shoeSize);
     }
 
     public static boolean hasBirthday() {
