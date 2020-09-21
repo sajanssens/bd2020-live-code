@@ -11,6 +11,8 @@ public class Person {
     private int shoeSize;
     private double length;
 
+    private Laptop mijnLaptop;
+
     static final int MIN_AGE = 0;
 
     // ------------------------------
@@ -73,6 +75,10 @@ public class Person {
 
     public void setLength(double length) {
         this.length = length;
+    }
+
+    public void setMijnLaptop(Laptop mijnLaptop) {
+        this.mijnLaptop = mijnLaptop;
     }
 
     // getters a.k.a. accessors
