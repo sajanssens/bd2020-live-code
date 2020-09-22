@@ -89,6 +89,10 @@ public class Person {
         return this.age;
     }
 
+    public Laptop getMijnLaptop() {
+        return mijnLaptop;
+    }
+
     // ----------------------------
 
 }
