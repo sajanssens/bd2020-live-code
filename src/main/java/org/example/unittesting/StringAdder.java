@@ -16,10 +16,7 @@ public class StringAdder {
                 String first = s.substring(0, commaPos);
                 String second = s.substring(commaPos + 1);
 
-                int i = trimAndParse(first);
-                int j = trimAndParse(second);
-
-                return i + j;
+                return add(first) + add(second);
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Voer een getal in tussen " + Integer.MIN_VALUE + " en " + Integer.MAX_VALUE);

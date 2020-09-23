@@ -1,6 +1,5 @@
 package org.example.unittesting;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -79,10 +78,13 @@ public class StringAdderTest {
     }
 
     @Test
-    public void whenAddIsCalledWithOneNumberAndACommaItThrowsAnException() {
+    public void whenAddIsCalledWithOneNumberAndACommaItReturnsThatNumber() {
         StringAdder adder = new StringAdder();
-        assertThrows(IllegalArgumentException.class, () -> adder.add(",6"));
-        assertThrows(IllegalArgumentException.class, () -> adder.add("6,"));
+        int result = adder.add(",-5");
+        assertThat(result, is(-5));
+
+        result = adder.add("-5,");
+        assertThat(result, is(-5));
     }
 
     @Test
@@ -95,7 +97,7 @@ public class StringAdderTest {
         assertThat(result, is(1));
     }
 
-    @Disabled
+    // @Disabled
     @Test
     public void whenAddIsCalledWithNumbersSeparatedByACommaItReturnsTheSum() {
         StringAdder adder = new StringAdder();
