@@ -2,9 +2,8 @@ package org.example.h10;
 
 public class Staff extends PermanentEmployee implements Promotable {
 
-
-    public Staff(int id, int pos) {
-        super(id, pos);
+    public Staff(int id, int age, int pos) {
+        super(id, age, pos);
     }
 
     public static void print() {

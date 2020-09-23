@@ -3,9 +3,8 @@ package org.example.h10;
 public class PermanentEmployee extends Employee {
     protected int position;
 
-
-    public PermanentEmployee(int id, int position) {
-        super(id);
+    public PermanentEmployee(int id, int age, int position) {
+        super(id, age);
         this.position = position;
     }
 
