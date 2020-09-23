@@ -5,14 +5,30 @@ public class StringAdder {
     public static final int ZERO = 0;
 
     public int add(String s) {
-        if (s.isEmpty()) {
-            return ZERO;
-        }
+        if (s.isEmpty()) return ZERO;
 
         try {
-            return Integer.parseInt(s);
+            if (!s.contains(",")) {
+                return trimAndParse(s);
+            } else {
+                int commaPos = s.indexOf(',');
+
+                String first = s.substring(0, commaPos);
+                String second = s.substring(commaPos + 1);
+
+                int i = trimAndParse(first);
+                int j = trimAndParse(second);
+
+                return i + j;
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Voer een getal in tussen " + Integer.MIN_VALUE + " en " + Integer.MAX_VALUE);
         } catch (Exception e) {
             throw new UnsupportedOperationException("Not yet implemented");
         }
+    }
+
+    private int trimAndParse(String input) {
+        return Integer.parseInt(input.trim());
     }
 }
