@@ -11,6 +11,7 @@ public class Employee {
     private String achternaam;
     private final int leeftijd;
     private int schoenmaat;
+    private Gender gender;
 
 }
 
