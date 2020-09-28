@@ -1,4 +1,4 @@
-package org.example.mocking;
+package org.example.mocking.greeter;
 
 public class Start {
 

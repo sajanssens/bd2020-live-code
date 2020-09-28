@@ -1,4 +1,4 @@
-package org.example.h14;
+package org.example.mocking.console;
 
 public class ConsoleWriter {
 
