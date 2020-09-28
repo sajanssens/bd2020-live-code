@@ -5,7 +5,7 @@ public class StringAdder {
     public static final int ZERO = 0;
 
     public int add(String s) {
-        if (s.isEmpty()) return ZERO;
+        if (s.trim().isEmpty()) return ZERO;
 
         try {
             if (!s.contains(",")) {
