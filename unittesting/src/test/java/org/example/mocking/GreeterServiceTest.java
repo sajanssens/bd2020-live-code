@@ -2,30 +2,33 @@ package org.example.mocking;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class GreeterServiceTest {
 
+    @InjectMocks
     private GreeterService target;
+
+    @Mock
+    private PersonDao personDaoMock;
 
     @BeforeEach
     void setUp() {
-        target = new GreeterService();
+        when(personDaoMock.get(anyInt())).thenReturn(new Person(0, "Ben Nep"));
     }
 
     @Test
     void greet() {
-        PersonDao personDaoMock = mock(PersonDao.class); // new PersonDao(); maar dan een mock.
-        when(personDaoMock.get(anyInt())).thenReturn(new Person(0, "Ben Nep"));
-        target.setDao(personDaoMock);
-
         String greet = target.greet();
-
         assertThat(greet, is("Hello Ben Nep"));
     }
 }
