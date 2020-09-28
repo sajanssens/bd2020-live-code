@@ -85,6 +85,9 @@ public class StringAdderTest {
 
         result = adder.add("-5,");
         assertThat(result, is(-5));
+
+        result = adder.add("   3  , ");
+        assertThat(result, is(3));
     }
 
     @Test
@@ -97,12 +100,21 @@ public class StringAdderTest {
         assertThat(result, is(1));
     }
 
-    // @Disabled
     @Test
     public void whenAddIsCalledWithNumbersSeparatedByACommaItReturnsTheSum() {
         StringAdder adder = new StringAdder();
         int result = adder.add("4,5,6");
         assertThat(result, is(15));
+    }
+
+    @Test
+    public void whenAddIsCalledWithPossiblyEmptyNumbersSeparatedByACommaItReturnsTheSum() {
+        StringAdder adder = new StringAdder();
+        int result = adder.add(" ,   4, ,6, ");
+        assertThat(result, is(10));
+
+        result = adder.add(",  , ,,   ");
+        assertThat(result, is(0));
     }
 
 }
