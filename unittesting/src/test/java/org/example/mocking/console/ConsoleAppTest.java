@@ -21,7 +21,7 @@ class ConsoleAppTest {
     }
 
     @Test
-    public void test5() {
+    public void testRun() {
         // given
         // mock Scanner:
         ConsoleReader scannerMock = mock(ConsoleReader.class);
