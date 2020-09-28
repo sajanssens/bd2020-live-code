@@ -7,10 +7,10 @@
         <groupId>org.example</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-	
+
     <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.example</groupId>
+    <groupId>org.example</groupId>
     <artifactId>javase</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -34,4 +34,19 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
