@@ -2,13 +2,9 @@ package org.example.h14;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.*;
 
 public class OCATest {
 
@@ -53,29 +49,4 @@ public class OCATest {
         assertThat(result, is("Stand"));
     }
 
-    @Test
-    public void test5() {
-        // given
-        // mock Scanner:
-        ConsoleReader scannerMock = mock(ConsoleReader.class);
-        target.setConsoleReader(scannerMock);
-        when(scannerMock.read()).thenReturn("Pen", "Pencil", "Box");
-
-        // mock System.out:
-        ConsoleWriter soutMock = mock(ConsoleWriter.class);
-        target.setConsoleWriter(soutMock);
-        ArgumentCaptor<String> arg = ArgumentCaptor.forClass(String.class);
-        doNothing().when(soutMock).write(arg.capture());
-
-        // when
-        target.question5();
-
-        // then
-        verify(soutMock, times(1)).write(anyString());
-        verify(soutMock, times(1)).write();
-
-        List<String> allValues = arg.getAllValues();
-        assertThat(allValues.size(), is(1));
-        assertThat(allValues.get(0).trim(), is("Box"));
-    }
 }

@@ -2,6 +2,7 @@ package org.example.h14;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class OCA {
 
@@ -39,19 +40,12 @@ public class OCA {
 
     }
 
-    private ConsoleReader consoleReader = new ConsoleReader();
-    private ConsoleWriter consoleWriter = new ConsoleWriter();
-
     public void question5() {
-        // Scanner scanner = new Scanner(System.in);
-        //
-        // String s1 = scanner.nextLine(); // Pen
-        // String s2 = scanner.nextLine(); // Pencil
-        // String s3 = scanner.nextLine(); // Box
+        Scanner scanner = new Scanner(System.in);
 
-        String s1 = consoleReader.read();
-        String s2 = consoleReader.read();
-        String s3 = consoleReader.read();
+        String s1 = scanner.nextLine(); // Pen
+        String s2 = scanner.nextLine(); // Pencil
+        String s3 = scanner.nextLine(); // Box
 
         List<String> items = new ArrayList<>();
         items.add(s1);
@@ -62,12 +56,10 @@ public class OCA {
             if (i.indexOf("P") == 0) {
                 continue;
             } else {
-                // System.out.println(i + " ");
-                consoleWriter.write(i + " ");
+                System.out.println(i + " ");
             }
         }
-        // System.out.println();
-        consoleWriter.write();
+        System.out.println();
     }
 
     public void question7() {
@@ -94,11 +86,4 @@ public class OCA {
         System.out.println(foundAt);
     }
 
-    public void setConsoleWriter(ConsoleWriter consoleWriter) {
-        this.consoleWriter = consoleWriter;
-    }
-
-    public void setConsoleReader(ConsoleReader consoleReader) {
-        this.consoleReader = consoleReader;
-    }
 }
