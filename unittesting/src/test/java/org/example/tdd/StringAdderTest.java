@@ -1,4 +1,4 @@
-package org.example.unittesting;
+package org.example.tdd;
 
 import org.junit.jupiter.api.Test;
 

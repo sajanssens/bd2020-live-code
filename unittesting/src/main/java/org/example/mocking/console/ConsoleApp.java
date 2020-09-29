@@ -20,10 +20,11 @@ public class ConsoleApp {
 
         for (String i : items) {
             if (i.indexOf("P") != 0) {
+                // System.out.println(i + " ");
                 consoleWriter.write(i + " ");
             }
         }
-        consoleWriter.write();
+        consoleWriter.write("");
     }
 
     public void setConsoleWriter(ConsoleWriter consoleWriter) {

@@ -11,12 +11,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-class ConsoleAppTest {
+public class ConsoleAppTest {
 
     private ConsoleApp target;
 
     @BeforeEach
-    public void beforeEach() throws Exception {
+    public void beforeEach() {
         target = new ConsoleApp();
     }
 
@@ -38,12 +38,13 @@ class ConsoleAppTest {
         target.run();
 
         // then
-        verify(soutMock, times(1)).write(anyString());
-        verify(soutMock, times(1)).write();
-
         List<String> allValues = arg.getAllValues();
-        assertThat(allValues.size(), is(1));
+        assertThat(allValues.size(), is(2));
         assertThat(allValues.get(0).trim(), is("Box"));
+        assertThat(allValues.get(1).trim(), is(""));
+
+        verify(scannerMock, times(3)).read();
+        verify(soutMock, times(2)).write(anyString());
     }
 
 }
