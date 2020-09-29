@@ -12,6 +12,24 @@
     <artifactId>unittesting</artifactId>
 
     <dependencies>
+        <!-- Voor schrijven van junit 4 testjes -->
+        <!-- komt al mee met de vintage-engine -->
+        <!--<dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>-->
+        <!-- Voor runnen van junit 4 testjes op het jupiter platform-->
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+        </dependency>
+        <!-- Voor schrijven van junit 5 testjes -->
+        <!-- komt al mee met de jupiter-engine -->
+        <!--<dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>-->
+        <!-- Voor runnen van junit 5 testjes op het jupiter platform-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>

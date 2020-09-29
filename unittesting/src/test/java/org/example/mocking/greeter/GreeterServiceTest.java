@@ -1,8 +1,5 @@
 package org.example.mocking.greeter;
 
-import org.example.mocking.greeter.GreeterService;
-import org.example.mocking.greeter.Person;
-import org.example.mocking.greeter.PersonDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
