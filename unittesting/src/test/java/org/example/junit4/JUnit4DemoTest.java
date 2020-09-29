@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class JUnit4Test {
+public class JUnit4DemoTest {
 
     @Test
     public void doeIets() {
