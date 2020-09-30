@@ -3,6 +3,9 @@ package org.example.h13.advanced;
 public class BakjeGeneric<T> {
     T inhoud;
 
+    public BakjeGeneric() {
+    }
+
     public BakjeGeneric(T inhoud) {
         this.inhoud = inhoud;
     }
