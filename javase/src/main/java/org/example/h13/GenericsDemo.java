@@ -62,10 +62,10 @@ public class GenericsDemo {
         Staff staff = new Staff(1, 1, 1);
         Bakje<Staff> staffBakje = new Bakje<>(staff);
 
-
         EmployeeService service = new EmployeeService();
-        service.leeftijdCalculator(staff);
-        service.leeftijdCalculator(temporaryEmployee);
+        int i = service.leeftijdCalculator(staff);
+        int i1 = service.leeftijdCalculator(temporaryEmployee);
+        System.out.println(i + i1);
     }
 
     public void doeIetsMet(BakjeObject b) {
