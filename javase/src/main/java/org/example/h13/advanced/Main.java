@@ -193,7 +193,7 @@ public class Main {
         list.add(bram);
         Person a = list.get(0);
 
-        // gets turned into (roughly):
+        // gets turned into (roughly): // type erasure
         List listCompiled = new ArrayList();
         list.add(bram);
         Person b = (Person) list.get(0); // list.get returns Object

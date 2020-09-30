@@ -51,31 +51,49 @@ public class GenericsDemo {
         }
 
         // DRY
-        BakjeObject bakje = new BakjeObject("");
+        BakjeObject bakjeObject = new BakjeObject("");
         BakjeInteger bakjeInteger = new BakjeInteger(1);
         BakjeString bakjeString = new BakjeString("S");
 
         // Bakje<String> stringBakje = new Bakje<String>("hallo");
         // Bakje<Integer> integerBakje = new Bakje<Integer>(123);
+
         TemporaryEmployee temporaryEmployee = new TemporaryEmployee(1, 1, 1);
-        Bakje<Employee> employeeBakje = new Bakje<>(temporaryEmployee);
         Staff staff = new Staff(1, 1, 1);
+
+        Bakje<Employee> bakjeEmployee = new Bakje<>(temporaryEmployee);
         Bakje<Staff> staffBakje = new Bakje<>(staff);
 
         EmployeeService service = new EmployeeService();
         int i = service.leeftijdCalculator(staff);
         int i1 = service.leeftijdCalculator(temporaryEmployee);
         System.out.println(i + i1);
+
+        //------------
+        doeIetsMet(bakjeObject);
+        doeIetsMet(bakjeInteger);
+        doeIetsMet(bakjeEmployee);
+        doeIetsMet(staffBakje);
+
+        // not allowed!
+        // Bakje<int> bakjeInt;
+        // Bakje<Employee> bakje = new Bakje<TemporaryEmployee>();
+
     }
 
-    public void doeIetsMet(BakjeObject b) {
+    public static void doeIetsMet(BakjeObject b) {
         Object inhoud = b.getInhoud();
-
     }
 
-    public void doeIetsMet(BakjeInteger b) {
+    public static void doeIetsMet(BakjeInteger b) {
         Integer inhoud = b.getInhoud();
         inhoud++;
+    }
+
+    public static <T extends Employee> void doeIetsMet(Bakje<T> b) {
+        T emp = b.getInhoud();
+        long salary = emp.getSalary();
+        System.out.println(salary);
     }
 
 }

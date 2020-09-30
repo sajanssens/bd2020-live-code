@@ -6,6 +6,10 @@ public class Bakje<T extends Employee> { // boundary
 
     private T inhoud;
 
+    public Bakje() {
+
+    }
+
     public Bakje(T inhoud) {
         this.inhoud = inhoud;
     }
