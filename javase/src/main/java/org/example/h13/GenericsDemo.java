@@ -1,6 +1,7 @@
 package org.example.h13;
 
 import org.example.h10.Employee;
+import org.example.h10.PermanentEmployee;
 import org.example.h10.Staff;
 import org.example.h10.TemporaryEmployee;
 import org.example.h7.Person;
@@ -11,7 +12,7 @@ public class GenericsDemo {
 
     // generics = generic types
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 
         Integer[] integers = new Integer[10];
         integers[0] = Integer.valueOf(0);
@@ -54,6 +55,10 @@ public class GenericsDemo {
         BakjeObject bakjeObject = new BakjeObject("");
         BakjeInteger bakjeInteger = new BakjeInteger(1);
         BakjeString bakjeString = new BakjeString("S");
+
+        Bakje<Staff> s = new Bakje<Staff>();
+        Class<PermanentEmployee> permanentEmployeeClass = PermanentEmployee.class;
+        Bakje<PermanentEmployee> permanentEmployeeBakje = new Bakje<>(permanentEmployeeClass);
 
         // Bakje<String> stringBakje = new Bakje<String>("hallo");
         // Bakje<Integer> integerBakje = new Bakje<Integer>(123);
