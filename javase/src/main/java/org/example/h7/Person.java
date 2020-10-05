@@ -1,7 +1,9 @@
 package org.example.h7;
 
+import java.util.Objects;
+
 // De class
-public class Person {
+public class Person implements Comparable<Person> {
 
     // STATE -----------------------
 
@@ -95,4 +97,32 @@ public class Person {
 
     // ----------------------------
 
+    @Override public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age &&
+                shoeSize == person.shoeSize &&
+                Double.compare(person.length, length) == 0 &&
+                Objects.equals(lastName, person.lastName);
+    }
+
+    @Override public int hashCode() {
+        return Objects.hash(lastName, age, shoeSize, length);
+    }
+
+    @Override public String toString() {
+        return "Person{" +
+                "lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", shoeSize=" + shoeSize +
+                ", length=" + length +
+                ", mijnLaptop=" + mijnLaptop +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return this.lastName.compareTo(o.lastName);
+    }
 }
