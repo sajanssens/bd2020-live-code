@@ -4,6 +4,8 @@ import org.example.h7.Person;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toMap;
+
 public class CollectionsDemo {
 
     public static void main(String[] args) {
@@ -39,11 +41,11 @@ public class CollectionsDemo {
         }
 
         Map<Integer, Person> personMap = new HashMap<>();
-        Person p = new Person("B", 1);
+        Person p1 = new Person("B", 1);
         Person p2 = new Person("C", 3);
         Person p3 = new Person("A", 2);
 
-        personMap.put(p.getAge(), p);
+        personMap.put(p1.getAge(), p1);
         personMap.put(p2.getAge(), p2);
         personMap.put(p3.getAge(), p3);
 
@@ -52,6 +54,34 @@ public class CollectionsDemo {
             Person value = row.getValue();
             System.out.println(key + " -- " + value);
         }
+
+        Queue<Integer> intRij = new PriorityQueue<>();
+
+        intRij.add(1); //first in, aan de kop van de rij
+        intRij.add(2); //second in, tweede in de rij
+        intRij.peek(); //returns de kop van de rij, in dit geval 1
+        intRij.poll(); //returns de kop van de rij en haalt die ook weg!
+
+        // ----------------------------
+
+        Set<Person> setje = new TreeSet<>();
+        setje.add(new Person("A"));
+        setje.add(new Person("B"));
+        setje.add(new Person("C"));
+        setje.add(new Person("D"));
+
+        // from set to map:
+        Map<String, Person> stringPersonMap = new HashMap<>();
+        for (Person p : setje) {
+            stringPersonMap.put(p.getLastName(), p);
+        }
+        Person p = stringPersonMap.get("E");
+
+        // or:
+
+        Map<String, Person> stringPersonMapAlt =
+                setje.stream().collect(toMap(Person::getLastName, person -> person));
+        Person q = stringPersonMapAlt.get("E");
 
     }
 }
