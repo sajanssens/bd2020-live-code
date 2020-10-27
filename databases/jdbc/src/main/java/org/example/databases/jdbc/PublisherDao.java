@@ -32,8 +32,8 @@ public class PublisherDao {
             return publishers;
         } catch (SQLException e) {
             log.error("", e);
+            return null;
         }
 
-        return null;
     }
 }

@@ -7,17 +7,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import static org.example.databases.jdbc.util.Props.get;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-class JdbcDemoTest {
+class PublisherDaoTest {
 
-    private final JdbcDemo target = new JdbcDemo();
+    private final PublisherDao target = new PublisherDao();
 
-    @BeforeAll static void setUp() throws SQLException {
+    @BeforeAll
+    static void setUp() throws SQLException {
         Connection connection = DriverManager.getConnection(get("url"), get("username"), get("password"));
 
-        // 3
         Statement statement = connection.createStatement();
         statement.execute("create table PUBLISHERS \n" +
                 "(\n" +
@@ -29,14 +32,16 @@ class JdbcDemoTest {
                 "\t primary key (PUB_ID)" +
                 ");");
 
-        statement.executeUpdate("INSERT INTO publishers (pub_id, pub_name, city, state, country) VALUES (N'0736', N'New Moon Books', N'Boston', N'MA', N'USA');");
+        statement.executeUpdate("INSERT INTO publishers (pub_id, pub_name, city, state, country) VALUES ('1', 'New Moon Books', 'Boston', 'MA', 'USA');");
+        statement.executeUpdate("INSERT INTO publishers (pub_id, pub_name, city, state, country) VALUES ('2', 'New Moon Books', 'Boston', 'MA', 'USA');");
 
-        // connection.close(); // this destroys the in mem db..?
+        // connection.close(); // don't close: this destroys the in mem db
     }
 
     @Test
     void run() {
-        target.run();
+        List<Publisher> all = target.findAll();
+        assertThat(all.size(), is(2));
     }
 
 }

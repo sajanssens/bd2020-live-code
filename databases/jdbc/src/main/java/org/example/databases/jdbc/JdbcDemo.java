@@ -29,7 +29,7 @@ public class JdbcDemo {
             Statement statement = connection.createStatement();
 
             // 4
-            ResultSet resultSet = statement.executeQuery("sel ect pub_id, pub_name, city, state from publishers");
+            ResultSet resultSet = statement.executeQuery("select pub_id, pub_name, city, state from publishers");
 
             // 5a data
             while (resultSet.next()) {
@@ -37,7 +37,7 @@ public class JdbcDemo {
                 String pub_name = resultSet.getString(2);
                 String city = resultSet.getString("city");
 
-                System.out.println(pub_id + ", " + pub_name);
+                log.debug(pub_id + ", " + pub_name + " @ " + city);
             }
 
             // 5b metadata
@@ -52,11 +52,6 @@ public class JdbcDemo {
 
         } catch (SQLException e) {
             log.error("Er gaat iets mis in SQL..." + e.getMessage());
-            log.debug("Exception!", e);
-            log.debug("Exception!", e);
-            log.debug("Exception!", e);
-            log.debug("Exception!", e);
-            log.debug("Exception!", e);
             log.debug("Exception!", e);
         }
     }
