@@ -35,8 +35,10 @@ class JdbcDemoTest {
     }
 
     @Test
-    void run() throws SQLException {
-        target.run();
+    void run() {
+        // int rows = target.getAllRows();
+        //
+        // assertThat(rows, is(1));
     }
 
 }
