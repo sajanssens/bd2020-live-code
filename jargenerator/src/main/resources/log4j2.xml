@@ -7,7 +7,7 @@
         </Console>
 
         <!-- append is false for test purposes so the logfiles are automatically overwritten. Don't use this on production. -->
-        <RollingFile name="fileLogger" append="false" fileName="logs/output.log" filePattern="target/output-%d{yyyy-MM-dd}.%i.log">
+        <RollingFile name="fileLogger" append="false" fileName="logs/output.txt" filePattern="target/output-%d{yyyy-MM-dd}.%i.log">
             <PatternLayout>
                 <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
             </PatternLayout>
@@ -25,7 +25,7 @@
         <Logger name="org.example" additivity="true">
             <appender-ref ref="fileLogger" level="all"/>
         </Logger>
-        <Root level="all">
+        <Root level="info">
             <AppenderRef ref="console"/>
         </Root>
     </Loggers>
