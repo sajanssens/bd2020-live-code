@@ -10,14 +10,24 @@ public class JdbcDemoExt {
         try (Connection connection = DriverManager.getConnection(get("url"), get("username"), get("password"));
              Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
             JdbcDemoExt jdbcDemo = new JdbcDemoExt();
-            jdbcDemo.getAllRows(statement);
-            jdbcDemo.insertTransactional(connection, statement);
 
+            int allRows = jdbcDemo.getAllRows(statement);
+            System.out.println("allRows=" + allRows);
+
+            jdbcDemo.insertTransactional(connection, statement);
             jdbcDemo.delete(connection, "1");
-            // jdbcDemo.delete(connection, "2; drop table test; --");
+
+            // sql injection....:
+            statement.execute("create table test(id int)");
+            jdbcDemo.delete(statement, "2; drop table test; --");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    private void delete(Statement s, String id) throws SQLException {
+        int i = s.executeUpdate("DELETE FROM publishers where PUB_ID=" + id);
+        System.out.println("Deleted " + i + " rows.");
     }
 
     private void delete(Connection connection, String id) throws SQLException {
@@ -28,12 +38,8 @@ public class JdbcDemoExt {
         System.out.println("Deleted " + i + " rows.");
     }
 
-    private void insertTransactional(Connection connection, Statement statement) {
-        try {
-            insert(connection, statement);
-        } catch (SQLException e) {
-            System.err.println("Er gaat iets mis in SQL..." + e.getMessage());
-        }
+    private void insertTransactional(Connection connection, Statement statement) throws SQLException {
+        insert(connection, statement);
     }
 
     private void insert(Connection connection, Statement statement) throws SQLException {
@@ -51,7 +57,6 @@ public class JdbcDemoExt {
     }
 
     public int getAllRows(Statement statement) throws SQLException {
-
         ResultSet resultSet = statement.executeQuery("select pub_id, pub_name, city, state from publishers");
 
         // 5a data

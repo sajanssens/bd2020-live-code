@@ -44,10 +44,8 @@ public class JdbcDemo {
             // 6
             connection.close();
 
-            // } catch (ClassNotFoundException e) {
-            //     System.err.println("Driver kon niet worden gevonden... Neem contact op..");
         } catch (SQLException e) {
-            System.err.println("Er gaat iets mis met SQL..." + e.getMessage());
+            System.err.println("Er gaat iets mis in SQL..." + e.getMessage());
         }
     }
 
