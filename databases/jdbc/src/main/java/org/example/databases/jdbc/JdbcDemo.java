@@ -16,12 +16,8 @@ public class JdbcDemo {
             // Class.forName("com.mysql.cj.jdbc.Driver");
             // SPI = plug and play
 
-            String serverTimezone = get("serverTimezone");
-            String username = get("username");
-            String password = get("password");
-
             // 2
-            Connection connection = DriverManager.getConnection(get("url") + get("database") + "?" + "serverTimezone=" + serverTimezone, username, password);
+            Connection connection = DriverManager.getConnection(get("url"), get("username"), get("password"));
 
             // 3
             Statement statement = connection.createStatement();
