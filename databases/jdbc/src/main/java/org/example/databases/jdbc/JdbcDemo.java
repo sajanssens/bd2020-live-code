@@ -1,10 +1,16 @@
 package org.example.databases.jdbc;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 
 import static org.example.databases.jdbc.util.Props.get;
 
 public class JdbcDemo {
+
+    // Simple Logging Facade For Java (SLF4J)
+    Logger log = LoggerFactory.getLogger(JdbcDemo.class);
 
     public static void main(String[] args) {
         new JdbcDemo().run();
@@ -23,7 +29,7 @@ public class JdbcDemo {
             Statement statement = connection.createStatement();
 
             // 4
-            ResultSet resultSet = statement.executeQuery("select pub_id, pub_name, city, state from publishers");
+            ResultSet resultSet = statement.executeQuery("sel ect pub_id, pub_name, city, state from publishers");
 
             // 5a data
             while (resultSet.next()) {
@@ -38,14 +44,20 @@ public class JdbcDemo {
             ResultSetMetaData metaData = resultSet.getMetaData();
             String catalogName = metaData.getCatalogName(1);
             String schemaName = metaData.getSchemaName(1);
-            System.out.println("catalogName=" + catalogName);
-            System.out.println("schemaName=" + schemaName);
+            log.debug("catalogName=" + catalogName);
+            log.debug("schemaName=" + schemaName);
 
             // 6
             connection.close();
 
         } catch (SQLException e) {
-            System.err.println("Er gaat iets mis in SQL..." + e.getMessage());
+            log.error("Er gaat iets mis in SQL..." + e.getMessage());
+            log.debug("Exception!", e);
+            log.debug("Exception!", e);
+            log.debug("Exception!", e);
+            log.debug("Exception!", e);
+            log.debug("Exception!", e);
+            log.debug("Exception!", e);
         }
     }
 
