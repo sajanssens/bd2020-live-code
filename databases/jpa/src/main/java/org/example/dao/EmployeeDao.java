@@ -3,10 +3,14 @@ package org.example.dao;
 import org.example.domain.Employee;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
 public class EmployeeDao {
-    EntityManager em = Persistence.createEntityManagerFactory("MySQL").createEntityManager();
+
+    private final EntityManager em;
+
+    public EmployeeDao(EntityManager em) {
+        this.em = em;
+    }
 
     public void save(Employee e) {
         em.getTransaction().begin();
@@ -15,7 +19,7 @@ public class EmployeeDao {
     }
 
     public Employee get(long id) {
-        return em.find(Employee.class, 1L);
+        return em.find(Employee.class, id);
     }
 
 }
