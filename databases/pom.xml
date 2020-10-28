@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>jdbc</module>
+        <module>jpa</module>
     </modules>
 
     <artifactId>databases</artifactId>
