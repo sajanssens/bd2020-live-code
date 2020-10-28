@@ -15,7 +15,7 @@ public class App {
     public static void main(String[] args) { new App().run(); }
 
     private void run() {
-        EntityManager em = Persistence.createEntityManagerFactory("MySQLjpademo").createEntityManager();
+        EntityManager em = Persistence.createEntityManagerFactory("MySQL-jpademo").createEntityManager();
 
         EmployeeDao dao = new EmployeeDao(em);
         Employee e = new Employee("Janssens");
