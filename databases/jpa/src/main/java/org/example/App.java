@@ -10,12 +10,12 @@ import javax.persistence.Persistence;
 
 public class App {
 
-    private Logger log = LoggerFactory.getLogger(App.class);
+    private final Logger log = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) { new App().run(); }
 
     private void run() {
-        EntityManager em = Persistence.createEntityManagerFactory("MySQL").createEntityManager();
+        EntityManager em = Persistence.createEntityManagerFactory("MySQLjpademo").createEntityManager();
 
         EmployeeDao dao = new EmployeeDao(em);
         Employee e = new Employee("Janssens");
@@ -23,7 +23,11 @@ public class App {
         dao.save(e);
 
         Employee employee = dao.get(1);
-        log.debug(employee.toString());
+        log(employee);
+    }
+
+    private void log(Object o) {
+        log.debug(o.toString());
     }
 
 }

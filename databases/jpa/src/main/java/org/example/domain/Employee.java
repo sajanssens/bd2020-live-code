@@ -19,6 +19,10 @@ public class Employee {
         this.name = name;
     }
 
+    public long getId() {
+        return id;
+    }
+
     @Override public String toString() {
         return "Employee{" +
                 "id=" + id +
