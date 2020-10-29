@@ -50,18 +50,18 @@ public class App {
 
         // Employee e3Hot = dao.get(e3.getId()); // works; do a find first
         // dao.save(e3Hot);
-        e3 = dao.update(e3); // merge works too! first, merges detached object into persistence context (i.e. find)
+        e3 = dao.update(e3); // merge works too! first, merges detached object into persistence context (i.e. find), then executes update query
 
         // remove
         // dao.remove(e3.getId()); // works for detached also
         dao.remove(e3); // e3 must be managed
 
-        // find...
+        // find
         dao.findAll().forEach(emp -> log(emp));
-        dao.findBy("Klaassen").forEach(emp -> log(emp));
-        dao.findAllWithNamedQuery().forEach(i -> log(i));
+        dao.findBy("Klaassen").forEach(this::log); // with method reference (same as above)
+        dao.findAllWithNamedQuery().forEach(this::log);
 
-        // em: persist, find, merge, remove, createQuery
+        // em: persist, find, merge, remove, createQuery, createNamedQuery
     }
 
     private void log(Object o) {
