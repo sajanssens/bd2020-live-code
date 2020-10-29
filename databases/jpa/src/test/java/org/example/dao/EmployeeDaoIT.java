@@ -1,18 +1,19 @@
 package org.example.dao;
 
 import org.example.domain.Employee;
+import org.hibernate.LazyInitializationException;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EmployeeDaoIT {
 
-    private EntityManager em = Persistence.createEntityManagerFactory("H2").createEntityManager();
-    private EmployeeDao target = new EmployeeDao(em);
+    private final EntityManager em = Persistence.createEntityManagerFactory("H2").createEntityManager();
+    private final EmployeeDao target = new EmployeeDao(em);
 
     @Test
     void whenEmployeeIsSavedAndGottenThenIsHasAnId() {
@@ -23,18 +24,25 @@ class EmployeeDaoIT {
     }
 
     @Test
-    void whenEmployeeIsGottenResumeIsLazyLoaded() {
+    void whenEmployeeIsGottenResumeIsLazilyLoaded() {
+        // given a new and saved employee
         Employee e = new Employee("emp");
         e.setResume("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non tempus enim. Duis eget sapien enim. Morbi elementum dictum tempus. Sed posuere tortor mauris, quis vehicula tellus congue non.");
-        target.save(e);
+        target.saveAndDetach(e);
 
-        Employee employee = target.get(e.getId());
-        String resume = employee.getResume();
-        assertThat(target.isManaged(employee)).isFalse();
-        assertThat(resume).isNotBlank();
+        // when we get it from the db and it is detached
+        Employee detachedEmp = target.get(e.getId());
+        em.clear(); // detach
+        // then resume is not loaded and cannot be loaded anymore
+        assertThat(target.isManaged(detachedEmp)).isFalse();
+        assertThrows(LazyInitializationException.class, detachedEmp::getResume);
 
-        List<Employee> allEmployees = target.findAll();
-        assertThat(allEmployees).allMatch(emp -> emp.getResume() == null);
-
+        // but
+        // when we keep it managed
+        Employee managedEmp = target.get(e.getId());
+        // then the resume can be loaded
+        assertThat(target.isManaged(managedEmp)).isTrue();
+        String resume = managedEmp.getResume(); // get resume from managed employee
+        assertThat(resume).isNotBlank(); // this should succeed
     }
 }
