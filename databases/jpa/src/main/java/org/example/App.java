@@ -27,7 +27,7 @@ public class App {
         dao.save(e);
 
         // SELECT .. WHERE id = ...
-        Employee e1 = dao.get(Employee.class, e.getId());
+        Employee e1 = dao.get(e.getId());
         log(e1);
 
         // Update with merge

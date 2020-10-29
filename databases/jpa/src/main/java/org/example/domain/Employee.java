@@ -74,8 +74,6 @@ public class Employee { // POJO (plain old java object)
         this.name = name;
     }
 
-
-
     @Override public String toString() {
         return "Employee{" +
                 "id=" + id +

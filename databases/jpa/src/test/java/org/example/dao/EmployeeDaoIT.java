@@ -18,7 +18,7 @@ class EmployeeDaoIT {
     @Test
     void whenEmployeeIsSavedAndGottenThenIsHasAnId() {
         target.save(new Employee("ABC"));
-        Employee employee = target.get(Employee.class, 1);
+        Employee employee = target.get(1);
 
         assertThat(employee.getId()).isEqualTo(1);
     }
@@ -31,7 +31,7 @@ class EmployeeDaoIT {
         target.saveAndDetach(e);
 
         // when we get it from the db and it is detached
-        Employee detachedEmp = target.get(Employee.class, e.getId());
+        Employee detachedEmp = target.get(e.getId());
         em.clear(); // detach
         // then resume is not loaded and cannot be loaded anymore
         assertThat(target.isManaged(detachedEmp)).isFalse();
@@ -39,7 +39,7 @@ class EmployeeDaoIT {
 
         // but
         // when we keep it managed
-        Employee managedEmp = target.get(Employee.class, e.getId());
+        Employee managedEmp = target.get(e.getId());
         // then the resume can be loaded
         assertThat(target.isManaged(managedEmp)).isTrue();
         String resume = managedEmp.getResume(); // get resume from managed employee

@@ -12,38 +12,14 @@ public class EmployeeDao extends Dao<Employee> {
         super(em);
     }
 
-    public void saveAndDetach(Employee e) {
-        em.getTransaction().begin();
-        em.persist(e);
-        detach();
-        em.getTransaction().commit();
-    }
-
-    private void detach() {
-        em.flush();
-        em.clear();
-    }
-
-    public Employee update(Employee e) {
-        em.getTransaction().begin();
-        Employee merged = em.merge(e);
-        em.getTransaction().commit();
-        return merged;
-    }
-
     public Employee updateName(long id, String name) {
-        Employee e = this.get(Employee.class, id);
+        Employee e = this.get(id);
         if (e != null) {
             em.getTransaction().begin();
             e.setName(name);
             em.getTransaction().commit();
         }
         return e;
-    }
-
-    public List<Employee> findAll() {
-        TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e ", Employee.class);
-        return query.getResultList();
     }
 
     public List<Employee> findBy(String name) {
@@ -58,13 +34,8 @@ public class EmployeeDao extends Dao<Employee> {
         return query.getResultList();
     }
 
-    public List<Employee> findAllWithNamedQuery() {
-        TypedQuery<Employee> findAll = em.createNamedQuery("Employee.findAll", Employee.class);
-        return findAll.getResultList();
-    }
-
     public void remove(long id) {
-        Employee e = get(Employee.class, id);
+        Employee e = get(id);
         if (e != null) {
             em.getTransaction().begin();
             em.remove(e);
@@ -72,13 +43,4 @@ public class EmployeeDao extends Dao<Employee> {
         }
     }
 
-    public void remove(Employee e) {
-        em.getTransaction().begin();
-        em.remove(e);
-        em.getTransaction().commit();
-    }
-
-    public boolean isManaged(Employee e) {
-        return em.contains(e);
-    }
 }

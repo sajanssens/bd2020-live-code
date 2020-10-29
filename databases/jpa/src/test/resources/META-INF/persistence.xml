@@ -8,6 +8,7 @@
     <persistence-unit name="H2">
         <class>org.example.domain.Employee</class>
         <class>org.example.domain.Department</class>
+        <class>org.example.domain.ParkingSpace</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
