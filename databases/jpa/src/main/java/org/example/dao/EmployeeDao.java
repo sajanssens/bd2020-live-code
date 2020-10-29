@@ -6,22 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class EmployeeDao {
-
-    private final EntityManager em;
+public class EmployeeDao extends Dao<Employee> {
 
     public EmployeeDao(EntityManager em) {
-        this.em = em;
-    }
-
-    public void save(Employee e) {
-        em.getTransaction().begin();
-        em.persist(e);
-        em.getTransaction().commit();
-    }
-
-    public Employee get(long id) {
-        return em.find(Employee.class, id);
+        super(em);
     }
 
     public void saveAndDetach(Employee e) {
@@ -44,7 +32,7 @@ public class EmployeeDao {
     }
 
     public Employee updateName(long id, String name) {
-        Employee e = this.get(id);
+        Employee e = this.get(Employee.class, id);
         if (e != null) {
             em.getTransaction().begin();
             e.setName(name);
@@ -76,7 +64,7 @@ public class EmployeeDao {
     }
 
     public void remove(long id) {
-        Employee e = get(id);
+        Employee e = get(Employee.class, id);
         if (e != null) {
             em.getTransaction().begin();
             em.remove(e);

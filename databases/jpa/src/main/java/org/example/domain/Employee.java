@@ -50,8 +50,13 @@ public class Employee { // POJO (plain old java object)
 
     // ---- relations:
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    // single valued relationships
+
+    @ManyToOne(cascade = CascadeType.MERGE) // uni directional
     private Department worksAt;
+
+    @ManyToOne
+    private ParkingSpace parkingSpace;
 
     // ------------ code:
 
@@ -68,6 +73,8 @@ public class Employee { // POJO (plain old java object)
     public void setName(String name) {
         this.name = name;
     }
+
+
 
     @Override public String toString() {
         return "Employee{" +
@@ -86,5 +93,10 @@ public class Employee { // POJO (plain old java object)
 
     public void setResume(String resume) {
         this.resume = resume;
+    }
+
+    public void setParkingSpace(ParkingSpace parkingSpace) {
+        this.parkingSpace = parkingSpace;
+        this.parkingSpace.addEmployee(this);
     }
 }

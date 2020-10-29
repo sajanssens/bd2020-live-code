@@ -49,7 +49,7 @@ class EmployeeDaoTest {
         when(emMock.find(eq(Employee.class), eq(id))).thenReturn(employeeMock);
 
         // when
-        Employee employee = target.get(id);
+        Employee employee = target.get(Employee.class, id);
 
         // then
         verify(emMock).find(eq(Employee.class), eq(id));

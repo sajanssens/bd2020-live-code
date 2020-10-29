@@ -1,9 +1,10 @@
 package org.example;
 
-import org.example.dao.DepartmentDao;
+import org.example.dao.Dao;
 import org.example.dao.EmployeeDao;
 import org.example.domain.Department;
 import org.example.domain.Employee;
+import org.example.domain.ParkingSpace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,12 +27,12 @@ public class App {
         dao.save(e);
 
         // SELECT .. WHERE id = ...
-        Employee employee = dao.get(e.getId());
-        log(employee);
+        Employee e1 = dao.get(Employee.class, e.getId());
+        log(e1);
 
         // Update with merge
-        employee.setName("Hendriksen");
-        dao.update(employee);
+        e1.setName("Hendriksen");
+        dao.update(e1);
 
         // Update without merge:
         Employee e2 = new Employee("Pietersen");
@@ -66,22 +67,35 @@ public class App {
 
         // --------------
 
-        employee.setWorksAt(new Department("Kenniscentrum"));
-        dao.update(employee);
+        e1.setWorksAt(new Department("Kenniscentrum"));
+        dao.update(e1);
 
         Department software_development = new Department("Software development");
 
-        DepartmentDao depDao = new DepartmentDao(em);
+        Dao<Department> depDao = new Dao<>(em);
         depDao.save(software_development);
 
-        employee.setWorksAt(software_development);
-        dao.update(employee);
+        e1.setWorksAt(software_development);
+        dao.update(e1);
 
         e2.setWorksAt(software_development);
         dao.update(e2);
 
         List<Employee> soft = dao.findByDepartment("Softwa");
         soft.forEach(this::log);
+
+        Dao<ParkingSpace> psDao = new Dao<>(em);
+
+        ParkingSpace parkingSpace = new ParkingSpace(123);
+        psDao.save(parkingSpace);
+
+        e1.setParkingSpace(parkingSpace);
+        e2.setParkingSpace(parkingSpace);
+
+        dao.update(e1);
+        dao.update(e2);
+
+        parkingSpace.getEmployees().forEach(this::log);
 
         // em: persist, find, merge, remove, createQuery, createNamedQuery
     }
