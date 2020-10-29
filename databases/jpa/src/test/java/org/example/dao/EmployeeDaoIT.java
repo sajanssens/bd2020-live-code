@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,6 +30,11 @@ class EmployeeDaoIT {
 
         Employee employee = target.get(e.getId());
         String resume = employee.getResume();
-        assertThat(resume).isBlank();
+        assertThat(target.isManaged(employee)).isFalse();
+        assertThat(resume).isNotBlank();
+
+        List<Employee> allEmployees = target.findAll();
+        assertThat(allEmployees).allMatch(emp -> emp.getResume() == null);
+
     }
 }

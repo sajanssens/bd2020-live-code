@@ -89,4 +89,8 @@ public class EmployeeDao {
         em.remove(e);
         em.getTransaction().commit();
     }
+
+    public boolean isManaged(Employee e) {
+        return em.contains(e);
+    }
 }
