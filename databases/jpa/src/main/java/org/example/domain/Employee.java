@@ -3,9 +3,11 @@ package org.example.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
-public class Employee {
+@NamedQuery(name = "Employee.findAll", query = "select e from Employee e")
+public class Employee { // POJO (plain old java object)
 
     @Id
     @GeneratedValue
@@ -21,6 +23,10 @@ public class Employee {
 
     public long getId() {
         return id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override public String toString() {
