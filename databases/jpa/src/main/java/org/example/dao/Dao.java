@@ -8,24 +8,10 @@ public class Dao<T> {
 
     protected final EntityManager em;
 
+    public Dao(EntityManager em) { this.em = em; }
+
     public T get(long id) {
         return em.find(T(), id);
-    }
-
-    @SuppressWarnings("unchecked")
-    public Dao(EntityManager em) {
-        this.em = em;
-
-    }
-
-    private String typeSimple() {
-        return T().getSimpleName();
-    }
-
-    @SuppressWarnings("unchecked")
-    private Class<T> T() {
-        return (Class<T>) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
     public void save(T e) {
@@ -69,6 +55,16 @@ public class Dao<T> {
 
     public List<T> findAllWithNamedQuery() {
         return em.createNamedQuery(typeSimple() + ".findAll", T()).getResultList();
+    }
+
+    private String typeSimple() {
+        return T().getSimpleName();
+    }
+
+    @SuppressWarnings("unchecked")
+    private Class<T> T() {
+        return (Class<T>) ((ParameterizedType) getClass()
+                .getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
 }
