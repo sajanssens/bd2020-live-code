@@ -1,19 +1,59 @@
 package org.example.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import org.example.util.BooleanTFConverter;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.TemporalType.DATE;
 
 @Entity
 @NamedQuery(name = "Employee.findAll", query = "select e from Employee e")
 public class Employee { // POJO (plain old java object)
 
+    // Basic fields:
+
     @Id
     @GeneratedValue
     private long id;
 
+    // @Basic
     private String name;
+
+    @Temporal(value = DATE)
+    private Date birthday = new Date();
+
+    // Better: use LocalDate or LocalDateTime
+    // Will be converted (automatically) to time by LocalDateTimeAttributeConverter
+    // @Convert(converter = LocalDateTimeAttributeConverter.class)
+    private LocalDateTime timeOfBirth = LocalDateTime.of(1979, 8, 22, 6, 15, 23, 789); // 22-08-1979 06h:15m
+
+    @Convert(converter = BooleanTFConverter.class)
+    private Boolean hasDriversLicence = false;
+
+    @Enumerated(value = EnumType.STRING)
+    private Gender gender = Gender.MALE;
+
+    @Embedded
+    private Address addressWork;
+
+    @Lob // CLOB Character large object
+    @Basic(fetch = LAZY) // only loaded when explicitly called (with getResume()) on a managed object.
+    private String resume;
+
+    @Lob // BLOB Binary large object
+    @Basic(fetch = EAGER)
+    private byte[] image;
+
+    // ---- relations:
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Department worksAt;
+
+    // ------------ code:
 
     public Employee() { }
 
@@ -34,5 +74,17 @@ public class Employee { // POJO (plain old java object)
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public void setWorksAt(Department worksAt) {
+        this.worksAt = worksAt;
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
     }
 }

@@ -59,8 +59,14 @@ public class EmployeeDao {
     }
 
     public List<Employee> findBy(String name) {
-        TypedQuery<Employee> query = em.createQuery("select e from Employee e where e.name = :firstarg", Employee.class);
-        query.setParameter("firstarg", name);
+        TypedQuery<Employee> query = em.createQuery("select e from Employee e where e.name LIKE :firstarg", Employee.class);
+        query.setParameter("firstarg", "%" + name + "%");
+        return query.getResultList();
+    }
+
+    public List<Employee> findByDepartment(String depName) {
+        TypedQuery<Employee> query = em.createQuery("select e from Employee e JOIN e.worksAt as d where d.name LIKE :firstarg", Employee.class);
+        query.setParameter("firstarg", "%" + depName + "%");
         return query.getResultList();
     }
 

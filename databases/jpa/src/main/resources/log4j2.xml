@@ -22,9 +22,16 @@
 
     <Loggers>
         <!-- name should be a package to enable logging from those packages-->
-        <Logger name="org.example" additivity="true">
+        <!--<Logger name="org.example" additivity="true">
             <appender-ref ref="fileLogger" level="all"/>
-        </Logger>
+        </Logger>-->
+
+        <!--to show hibernate log statements:-->
+        <Logger name="org.hibernate" level="INFO"/>
+
+        <!--to show binding parameter log statements:-->
+        <Logger name="org.hibernate.type.descriptor.sql" level="TRACE"/>
+
         <Root level="debug">
             <AppenderRef ref="console"/>
         </Root>

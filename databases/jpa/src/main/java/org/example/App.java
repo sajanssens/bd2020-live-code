@@ -1,12 +1,15 @@
 package org.example;
 
+import org.example.dao.DepartmentDao;
 import org.example.dao.EmployeeDao;
+import org.example.domain.Department;
 import org.example.domain.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class App {
 
@@ -58,8 +61,27 @@ public class App {
 
         // find
         dao.findAll().forEach(emp -> log(emp));
-        dao.findBy("Klaassen").forEach(this::log); // with method reference (same as above)
+        dao.findBy("Klaass").forEach(this::log); // with method reference (same as above)
         dao.findAllWithNamedQuery().forEach(this::log);
+
+        // --------------
+
+        employee.setWorksAt(new Department("Kenniscentrum"));
+        dao.update(employee);
+
+        Department software_development = new Department("Software development");
+
+        DepartmentDao depDao = new DepartmentDao(em);
+        depDao.save(software_development);
+
+        employee.setWorksAt(software_development);
+        dao.update(employee);
+
+        e2.setWorksAt(software_development);
+        dao.update(e2);
+
+        List<Employee> soft = dao.findByDepartment("Softwa");
+        soft.forEach(this::log);
 
         // em: persist, find, merge, remove, createQuery, createNamedQuery
     }
