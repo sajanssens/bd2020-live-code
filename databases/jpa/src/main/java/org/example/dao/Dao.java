@@ -1,5 +1,8 @@
 package org.example.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.EntityManager;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -72,5 +75,6 @@ public abstract class Dao<T, I> {
         return (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
     }
+
 
 }

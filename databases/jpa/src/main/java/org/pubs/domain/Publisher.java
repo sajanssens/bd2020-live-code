@@ -31,4 +31,11 @@ public class Publisher {
     public String getId() {
         return id;
     }
+
+    @Override public String toString() {
+        return "Publisher{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
