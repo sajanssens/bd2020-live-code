@@ -2,12 +2,14 @@ package org.example.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@NamedQuery(name = "Department.findAll", query = "select e from Department e")
 public class Department extends AbstractEntity {
 
     private String name;

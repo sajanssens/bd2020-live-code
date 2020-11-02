@@ -16,7 +16,13 @@ public class App {
 
     private final Logger log = LoggerFactory.getLogger(App.class);
 
-    public static void main(String[] args) { new App().run(); }
+    public static void main(String[] args) {
+        App app = new App();
+        // app.run();
+        // app.lazyDemo();
+        app.inheritanceDemo();
+
+    }
 
     private void run() {
         EntityManager em = Persistence.createEntityManagerFactory("MySQL-jpademo").createEntityManager();
@@ -72,8 +78,8 @@ public class App {
         dao.remove(e3); // e3 must be managed
 
         // find
-        dao.findAll().forEach(emp -> log(emp));
-        // dao.findBy("Klaass").forEach(this::log); // with method reference (same as above)
+        // dao.findAll().forEach(emp -> log(emp));
+        dao.findBy("Klaass").forEach(this::log); // with method reference (same as above)
         dao.findAllWithNamedQuery().forEach(this::log);
 
         // --------------
@@ -115,7 +121,7 @@ public class App {
 
         dao.saveAndDetach(employeemanaged);
 
-        lazyDemo();
+        List<Employee> janssens = dao.findUsingCriteriaAPI("Janssens", false);
 
         // em: persist, find, merge, remove, createQuery, createNamedQuery
     }
@@ -129,6 +135,15 @@ public class App {
 
         Employee withWerkplek = employeeDao.findWithWerkplek(1);
         Employee withWerkplekWithQuery = employeeDao.findWithWerkplekWithQuery(1);
+
+    }
+
+    private void inheritanceDemo() {
+        EntityManager em = Persistence.createEntityManagerFactory("MySQL-jpademo").createEntityManager();
+        EmployeeDao employeeDao = new EmployeeDao(em);
+
+        Employee p = new PermanentEmployee("Perma", 10);
+        employeeDao.save(p);
 
     }
 

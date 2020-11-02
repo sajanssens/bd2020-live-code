@@ -5,7 +5,11 @@ import org.example.domain.Employee;
 import org.example.domain.Werkplek;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class EmployeeDao extends Dao<Employee> {
@@ -28,6 +32,8 @@ public class EmployeeDao extends Dao<Employee> {
         e.setLeaseCar(c);
         update(e);
     }
+
+    // JPQL Queries examples:
 
     public List<Employee> findBy(String name) {
         TypedQuery<Employee> query = em.createQuery("select e from Employee e where e.name LIKE :firstarg", Employee.class);
@@ -58,13 +64,29 @@ public class EmployeeDao extends Dao<Employee> {
         return query.getResultList();
     }
 
-    public void remove(long id) {
-        Employee e = get(id);
-        if (e != null) {
-            em.getTransaction().begin();
-            em.remove(e);
-            em.getTransaction().commit();
-        }
+    // Native queries: pure sql
+    public List<Employee> findWithNative(String partOfResume) {
+        Query nativeQuery = em.createNativeQuery("SELECT * FROM Employee WHERE resume LIKE :partOfResume", Employee.class);
+        nativeQuery.setParameter("partOfResume", "'%" + partOfResume + "%'");
+        return nativeQuery.getResultList();
+    }
+
+    // Criteria API ---------
+
+    public List<Employee> findUsingCriteriaAPI(String name, Boolean hasDriversLicence) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Employee> q = cb.createQuery(Employee.class);
+
+        Root<Employee> emp = q.from(Employee.class);
+
+        q.select(emp).distinct(true)
+                .where(cb.or(
+                        cb.equal(emp.get("naam"), name),
+                        cb.equal(emp.get("hasDriversLicence"), hasDriversLicence)
+                        )
+                );
+
+        return em.createQuery(q).getResultList();
     }
 
 }
