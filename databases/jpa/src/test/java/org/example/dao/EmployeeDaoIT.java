@@ -23,8 +23,9 @@ class EmployeeDaoIT {
         assertThat(employee.getId()).isEqualTo(1);
     }
 
+    // IMPORTANT: to let this succeed, build your project woth maven first so the hibernate-enhance-maven-plugin is executed!
     @Test
-    void whenEmployeeIsGottenResumeIsLazilyLoaded() {
+    void whenEmployeeIsLoadedResumeIsLazilyLoaded() {
         // given a new and saved employee
         Employee e = new Employee("emp");
         e.setResume("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non tempus enim. Duis eget sapien enim. Morbi elementum dictum tempus. Sed posuere tortor mauris, quis vehicula tellus congue non.");

@@ -5,6 +5,8 @@ import org.example.util.BooleanTFConverter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
@@ -12,13 +14,9 @@ import static javax.persistence.TemporalType.DATE;
 
 @Entity
 @NamedQuery(name = "Employee.findAll", query = "select e from Employee e")
-public class Employee { // POJO (plain old java object)
+public class Employee extends AbstractEntity { // POJO (plain old java object)
 
     // Basic fields:
-
-    @Id
-    @GeneratedValue
-    private long id;
 
     // @Basic
     private String name;
@@ -50,13 +48,23 @@ public class Employee { // POJO (plain old java object)
 
     // ---- relations:
 
-    // single valued relationships
+    // single valued relationships (standaard eager loading)
 
-    @ManyToOne(cascade = CascadeType.MERGE) // uni directional
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // bi directional
     private Department worksAt;
 
-    @ManyToOne
-    private ParkingSpace parkingSpace;
+    @ManyToOne(fetch = LAZY)
+    private ParkingSpace parkingSpace; // bi directional, owning side
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Car leaseCar;
+
+    // collection valued (standaard lazy loading) bidi
+    @JoinTable(name = "medewerkerwerkplek",
+            joinColumns = @JoinColumn(name = "medewerkerId"),
+            inverseJoinColumns = @JoinColumn(name = "werkplekId"))
+    @ManyToMany(/*mappedBy = "users", */cascade = CascadeType.PERSIST, fetch = LAZY)
+    private List<Werkplek> flexwerkplekken = new LinkedList<>();
 
     // ------------ code:
 
@@ -64,10 +72,6 @@ public class Employee { // POJO (plain old java object)
 
     public Employee(String name) {
         this.name = name;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public void setName(String name) {
@@ -85,6 +89,10 @@ public class Employee { // POJO (plain old java object)
         this.worksAt = worksAt;
     }
 
+    public void setLeaseCar(Car leaseCar) {
+        this.leaseCar = leaseCar;
+    }
+
     public String getResume() {
         return resume;
     }
@@ -96,5 +104,13 @@ public class Employee { // POJO (plain old java object)
     public void setParkingSpace(ParkingSpace parkingSpace) {
         this.parkingSpace = parkingSpace;
         this.parkingSpace.addEmployee(this);
+    }
+
+    public void addFlexwerkplek(Werkplek w) {
+        this.flexwerkplekken.add(w);
+    }
+
+    public List<Werkplek> getFlexwerkplekken() {
+        return flexwerkplekken;
     }
 }

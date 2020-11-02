@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public class Dao<T> {
+public abstract class Dao<T> {
 
     protected final EntityManager em;
 
@@ -12,6 +12,12 @@ public class Dao<T> {
 
     public T get(long id) {
         return em.find(T(), id);
+    }
+
+    public T getDetached(long id) {
+        T t = em.find(T(), id);
+        em.detach(t);
+        return t;
     }
 
     public void save(T e) {

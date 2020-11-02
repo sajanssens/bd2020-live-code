@@ -1,10 +1,10 @@
 package org.example;
 
 import org.example.dao.Dao;
+import org.example.dao.DepartmentDao;
 import org.example.dao.EmployeeDao;
-import org.example.domain.Department;
-import org.example.domain.Employee;
-import org.example.domain.ParkingSpace;
+import org.example.dao.ParkingSpaceDao;
+import org.example.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +24,14 @@ public class App {
 
         // INSERT INTO ...
         Employee e = new Employee("Janssens");
+        Car skoda = new Car("Skoda");
+        // not needed when cascade = persist on Employee.leaseCar
+        // Dao<Car> carDao = new Dao<>(em);
+        // carDao.save(skoda);
+        e.setLeaseCar(skoda);
+        e.addFlexwerkplek(new Werkplek("E1-T3"));
+        e.addFlexwerkplek(new Werkplek("E2-T1"));
+        e.addFlexwerkplek(new Werkplek("E2-T2"));
         dao.save(e);
 
         // SELECT .. WHERE id = ...
@@ -41,6 +49,9 @@ public class App {
         // e2.setName("Klaassen");
         // dao.save(e2);
         dao.updateName(e2.getId(), "Klaassen");
+        dao.addCar(e2, new Car("VW"));
+        e2.addFlexwerkplek(new Werkplek("E3-T3"));
+        e2.addFlexwerkplek(new Werkplek("E3-T2"));
 
         // Save detached entity:
         Employee e3 = new Employee("Pietersen");
@@ -62,7 +73,7 @@ public class App {
 
         // find
         dao.findAll().forEach(emp -> log(emp));
-        dao.findBy("Klaass").forEach(this::log); // with method reference (same as above)
+        // dao.findBy("Klaass").forEach(this::log); // with method reference (same as above)
         dao.findAllWithNamedQuery().forEach(this::log);
 
         // --------------
@@ -72,7 +83,7 @@ public class App {
 
         Department software_development = new Department("Software development");
 
-        Dao<Department> depDao = new Dao<>(em);
+        Dao<Department> depDao = new DepartmentDao(em);
         depDao.save(software_development);
 
         e1.setWorksAt(software_development);
@@ -84,7 +95,7 @@ public class App {
         List<Employee> soft = dao.findByDepartment("Softwa");
         soft.forEach(this::log);
 
-        Dao<ParkingSpace> psDao = new Dao<>(em);
+        Dao<ParkingSpace> psDao = new ParkingSpaceDao(em);
 
         ParkingSpace parkingSpace = new ParkingSpace(123);
         psDao.save(parkingSpace);
@@ -97,7 +108,28 @@ public class App {
 
         parkingSpace.getEmployees().forEach(this::log);
 
+        Employee employeemanaged = dao.get(e1.getId());
+
+        ParkingSpace parkingSpaceDetached = psDao.getDetached(parkingSpace.getId());
+        ParkingSpace parkingSpace2 = psDao.getDetached(parkingSpaceDetached.getId());
+
+        dao.saveAndDetach(employeemanaged);
+
+        lazyDemo();
+
         // em: persist, find, merge, remove, createQuery, createNamedQuery
+    }
+
+    private void lazyDemo() {
+        EntityManager em = Persistence.createEntityManagerFactory("MySQL-jpademo").createEntityManager();
+        EmployeeDao employeeDao = new EmployeeDao(em);
+
+        Employee employee = employeeDao.getDetached(1);
+        log(employee);
+
+        Employee withWerkplek = employeeDao.findWithWerkplek(1);
+        Employee withWerkplekWithQuery = employeeDao.findWithWerkplekWithQuery(1);
+
     }
 
     private void log(Object o) {

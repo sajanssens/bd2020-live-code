@@ -1,21 +1,23 @@
 package org.example.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Department {
-
-    @Id
-    @GeneratedValue
-    private long id;
+public class Department extends AbstractEntity {
 
     private String name;
 
     public Department() {
     }
+
+    // collection valued (standaard lazy loading)
+    @OneToMany(mappedBy = "worksAt", fetch = FetchType.EAGER)
+    private List<Employee> workers = new ArrayList<>();
 
     public Department(String name) {
         this.name = name;
