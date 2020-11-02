@@ -7,8 +7,25 @@
 
     <persistence-unit name="H2">
         <class>org.example.domain.Employee</class>
+        <class>org.example.domain.PermanentEmployee</class>
+        <class>org.example.domain.TemporaryEmployee</class>
         <class>org.example.domain.Department</class>
         <class>org.example.domain.ParkingSpace</class>
+        <class>org.example.domain.Car</class>
+        <class>org.example.domain.Werkplek</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.archive.autodetection" value="class, hbm"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="pubs">
+        <class>org.pubs.domain.Publisher</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>

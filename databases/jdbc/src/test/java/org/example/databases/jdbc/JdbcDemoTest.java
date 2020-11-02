@@ -17,7 +17,6 @@ class JdbcDemoTest {
     @BeforeAll static void setUp() throws SQLException {
         Connection connection = DriverManager.getConnection(get("url"), get("username"), get("password"));
 
-        // 3
         Statement statement = connection.createStatement();
         statement.execute("create table PUBLISHERS \n" +
                 "(\n" +

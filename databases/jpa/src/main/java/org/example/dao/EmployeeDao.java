@@ -65,6 +65,7 @@ public class EmployeeDao extends Dao<Employee> {
     }
 
     // Native queries: pure sql
+    @SuppressWarnings("unchecked")
     public List<Employee> findWithNative(String partOfResume) {
         Query nativeQuery = em.createNativeQuery("SELECT * FROM Employee WHERE resume LIKE :partOfResume", Employee.class);
         nativeQuery.setParameter("partOfResume", "'%" + partOfResume + "%'");
