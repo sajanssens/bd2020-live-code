@@ -18,7 +18,7 @@ class JdbcDemoTest {
         Connection connection = DriverManager.getConnection(get("url"), get("username"), get("password"));
 
         Statement statement = connection.createStatement();
-        statement.execute("create table PUBLISHERS \n" +
+        statement.execute("create table if not exists PUBLISHERS \n" +
                 "(\n" +
                 "\tPUB_ID varchar(4) not null,\n" +
                 "\tcity varchar(255) null,\n" +
