@@ -1,5 +1,6 @@
 package org.example.databases.jdbc;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -34,8 +35,6 @@ class PublisherDaoTest {
 
         statement.executeUpdate("INSERT INTO publishers (pub_id, pub_name, city, state, country) VALUES ('1', 'New Moon Books', 'Boston', 'MA', 'USA');");
         statement.executeUpdate("INSERT INTO publishers (pub_id, pub_name, city, state, country) VALUES ('2', 'New Moon Books', 'Boston', 'MA', 'USA');");
-
-        // connection.close(); // don't close: this destroys the in mem db
     }
 
     @Test
@@ -44,4 +43,8 @@ class PublisherDaoTest {
         assertThat(all.size(), is(2));
     }
 
+    @AfterAll
+    static void afterAll() throws SQLException {
+        DriverManager.getConnection(get("url"), get("username"), get("password")).close();
+    }
 }

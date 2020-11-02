@@ -1,5 +1,6 @@
 package org.example.databases.jdbc;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -36,6 +37,11 @@ class JdbcDemoTest {
     @Test
     void run() {
         target.run();
+    }
+
+    @AfterAll
+    static void afterAll() throws SQLException {
+        DriverManager.getConnection(get("url"), get("username"), get("password")).close();
     }
 
 }
