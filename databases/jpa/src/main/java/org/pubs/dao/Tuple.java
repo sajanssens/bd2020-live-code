@@ -1,23 +1,21 @@
 package org.pubs.dao;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+public class Tuple<T, V, W> {
+    public final T a;
+    public final V b;
+    public final W c;
 
-public class Tuple {
-    public final List content = new ArrayList();
-
-    public Tuple(Object... objects) {
-        content.addAll(Arrays.asList(objects));
-    }
-
-    public List getContent() {
-        return content;
+    public Tuple(T a, V b, W c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
     }
 
     @Override public String toString() {
-        return "Tuple{" +
-                "content=" + content +
+        return "Tuple2{" +
+                "a=" + a +
+                ", b=" + b +
+                ", c=" + c +
                 '}';
     }
 }
