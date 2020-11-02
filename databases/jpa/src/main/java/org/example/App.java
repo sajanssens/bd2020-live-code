@@ -89,7 +89,7 @@ public class App {
 
         Department software_development = new Department("Software development");
 
-        Dao<Department> depDao = new DepartmentDao(em);
+        Dao<Department, Long> depDao = new DepartmentDao(em);
         depDao.save(software_development);
 
         e1.setWorksAt(software_development);
@@ -101,7 +101,7 @@ public class App {
         List<Employee> soft = dao.findByDepartment("Softwa");
         soft.forEach(this::log);
 
-        Dao<ParkingSpace> psDao = new ParkingSpaceDao(em);
+        Dao<ParkingSpace, Long> psDao = new ParkingSpaceDao(em);
 
         ParkingSpace parkingSpace = new ParkingSpace(123);
         psDao.save(parkingSpace);
@@ -130,7 +130,7 @@ public class App {
         EntityManager em = Persistence.createEntityManagerFactory("MySQL-jpademo").createEntityManager();
         EmployeeDao employeeDao = new EmployeeDao(em);
 
-        Employee employee = employeeDao.getDetached(1);
+        Employee employee = employeeDao.getDetached(1L);
         log(employee);
 
         Employee withWerkplek = employeeDao.findWithWerkplek(1);

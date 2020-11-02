@@ -12,7 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class EmployeeDao extends Dao<Employee> {
+public class EmployeeDao extends Dao<Employee, Long> {
 
     public EmployeeDao(EntityManager em) {
         super(em);

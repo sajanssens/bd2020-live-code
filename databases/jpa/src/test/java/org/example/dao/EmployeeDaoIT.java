@@ -18,7 +18,7 @@ class EmployeeDaoIT {
     @Test
     void whenEmployeeIsSavedAndGottenThenIsHasAnId() {
         target.save(new Employee("ABC"));
-        Employee employee = target.get(1);
+        Employee employee = target.get(1L);
 
         assertThat(employee.getId()).isEqualTo(1);
     }
