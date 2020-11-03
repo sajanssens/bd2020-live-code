@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PubsIT {
 
-    private final EntityManager em = Persistence.createEntityManagerFactory("pubs").createEntityManager();
+    private final EntityManager em = Persistence.createEntityManagerFactory("pubs-h2").createEntityManager();
 
     private final PublisherDao publisherDao = new PublisherDao(em);
     private final TitleDao titleDao = new TitleDao(em);

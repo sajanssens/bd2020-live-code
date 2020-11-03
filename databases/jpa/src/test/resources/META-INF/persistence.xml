@@ -24,7 +24,7 @@
         </properties>
     </persistence-unit>
 
-    <persistence-unit name="pubs">
+    <persistence-unit name="pubs-h2">
         <class>org.pubs.domain.Publisher</class>
         <class>org.pubs.domain.Title</class>
         <properties>

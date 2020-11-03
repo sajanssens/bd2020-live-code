@@ -15,8 +15,8 @@ public abstract class Dao<E, I> { // E: type of entity; T: type of id of entity
     }
 
     public E getDetached(I id) {
-        E e = em.find(T(), id);
-        detach(e);
+        E e = get(id);
+        em.detach(e);
         return e;
     }
 
@@ -29,13 +29,9 @@ public abstract class Dao<E, I> { // E: type of entity; T: type of id of entity
     public void saveAndDetach(E e) {
         em.getTransaction().begin();
         em.persist(e);
-        detach(e);
-        em.getTransaction().commit();
-    }
-
-    private void detach(E e) {
         em.flush();
         em.detach(e);
+        em.getTransaction().commit();
     }
 
     public E update(E e) {

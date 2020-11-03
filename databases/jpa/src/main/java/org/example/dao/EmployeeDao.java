@@ -49,7 +49,7 @@ public class EmployeeDao extends Dao<Employee, Long> {
 
     public Employee findWithWerkplek(long id) {
         Employee e = em.find(Employee.class, id);
-        List<Werkplek> flexwerkplekken = e.getFlexwerkplekken();
+        List<Werkplek> flexwerkplekken = e.getFlexwerkplekken(); // and trigger JPA to load werkplekken
         return e;
     }
 
@@ -82,7 +82,7 @@ public class EmployeeDao extends Dao<Employee, Long> {
 
         q.select(emp).distinct(true)
                 .where(cb.or(
-                        cb.equal(emp.get("naam"), name),
+                        cb.equal(emp.get("name"), name),
                         cb.equal(emp.get("hasDriversLicence"), hasDriversLicence)
                         )
                 );
