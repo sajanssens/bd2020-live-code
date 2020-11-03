@@ -3,7 +3,7 @@ package org.example.domain;
 import javax.persistence.Entity;
 
 @Entity
-public class Car extends AbstractEntity {
+public class Car extends AbstractEntity<Long> {
 
     private String brand;
 

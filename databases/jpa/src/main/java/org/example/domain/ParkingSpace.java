@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class ParkingSpace extends AbstractEntity {
+public class ParkingSpace extends AbstractEntity<Long> {
 
     private int number;
 

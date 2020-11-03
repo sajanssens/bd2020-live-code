@@ -13,6 +13,7 @@ public class TitleDao extends Dao<Title, String> {
         super(em);
     }
 
+    @SuppressWarnings("unchecked")
     public List<Object[]> SELECT_Assignment_6_4_native() {
         Query nativeQuery = em.createNativeQuery(
                 "select pub_id\n" +
@@ -29,8 +30,8 @@ public class TitleDao extends Dao<Title, String> {
         return (List<Object[]>) nativeQuery.getResultList();
     }
 
+    @SuppressWarnings("rawtypes")
     public List<Tuple> SELECT_Assignment_6_4() {
-
         TypedQuery<Tuple> query = em.createQuery(
                 "select new org.pubs.dao.Tuple(t.publisher, sum(t.advance), avg(t.price))" +
                         "from Title t " +

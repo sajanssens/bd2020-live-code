@@ -3,16 +3,16 @@ package org.example.domain;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 @MappedSuperclass
-public abstract class AbstractEntity {
+public abstract class AbstractEntity<I extends Serializable> {
 
     @Id
     @GeneratedValue
-    protected long id;
+    protected I id;
 
-    public long getId() {
-        return id;
-    }
+    public I getId() { return id; }
 
+    public void setId(I id) { this.id = id; }
 }

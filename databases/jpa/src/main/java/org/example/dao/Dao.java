@@ -1,80 +1,74 @@
 package org.example.dao;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.persistence.EntityManager;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public abstract class Dao<T, I> {
+public abstract class Dao<E, I> { // E: type of entity; T: type of id of entity
 
     protected final EntityManager em;
 
     public Dao(EntityManager em) { this.em = em; }
 
-    public T get(I id) {
+    public E get(I id) {
         return em.find(T(), id);
     }
 
-    public T getDetached(I id) {
-        T t = em.find(T(), id);
-        em.detach(t);
-        return t;
+    public E getDetached(I id) {
+        E e = em.find(T(), id);
+        detach(e);
+        return e;
     }
 
-    public void save(T e) {
+    public void save(E e) {
         em.getTransaction().begin();
         em.persist(e);
         em.getTransaction().commit();
     }
 
-    public void saveAndDetach(T e) {
+    public void saveAndDetach(E e) {
         em.getTransaction().begin();
         em.persist(e);
-        detach();
+        detach(e);
         em.getTransaction().commit();
     }
 
-    private void detach() {
+    private void detach(E e) {
         em.flush();
-        em.clear();
+        em.detach(e);
     }
 
-    public T update(T e) {
+    public E update(E e) {
         em.getTransaction().begin();
-        T merged = em.merge(e);
+        E merged = em.merge(e);
         em.getTransaction().commit();
         return merged;
     }
 
-    public void remove(T e) {
+    public void remove(E e) {
         em.getTransaction().begin();
         em.remove(e);
         em.getTransaction().commit();
     }
 
-    public boolean isManaged(T e) {
+    public boolean isManaged(E e) {
         return em.contains(e);
     }
 
-    public List<T> findAll() {
+    public List<E> findAll() {
         return em.createQuery("SELECT e FROM " + typeSimple() + " e ", T()).getResultList();
     }
 
-    public List<T> findAllWithNamedQuery() {
+    public List<E> findAllWithNamedQuery() {
         return em.createNamedQuery(typeSimple() + ".findAll", T()).getResultList();
     }
 
-    private String typeSimple() {
-        return T().getSimpleName();
-    }
+    private String typeSimple() { return T().getSimpleName(); }
 
     @SuppressWarnings("unchecked")
-    private Class<T> T() {
-        return (Class<T>) ((ParameterizedType) getClass()
+    private Class<E> T() {
+        return (Class<E>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
     }
-
 
 }

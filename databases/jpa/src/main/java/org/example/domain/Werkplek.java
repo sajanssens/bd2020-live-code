@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-public class Werkplek extends AbstractEntity {
+public class Werkplek extends AbstractEntity<Long> {
 
     private String number;
 

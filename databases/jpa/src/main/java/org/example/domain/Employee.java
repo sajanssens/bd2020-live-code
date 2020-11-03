@@ -15,7 +15,7 @@ import static javax.persistence.TemporalType.DATE;
 @Entity
 @NamedQuery(name = "Employee.findAll", query = "select e from Employee e")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Employee extends AbstractEntity { // POJO (plain old java object)
+public class Employee extends AbstractEntity<Long> { // POJO (plain old java object)
 
     // Basic fields:
 

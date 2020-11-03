@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 @NamedQuery(name = "Department.findAll", query = "select e from Department e")
-public class Department extends AbstractEntity {
+public class Department extends AbstractEntity<Long> {
 
     private String name;
 

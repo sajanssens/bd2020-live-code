@@ -21,7 +21,6 @@ public class App {
         // app.run();
         // app.lazyDemo();
         app.inheritanceDemo();
-
     }
 
     private void run() {
