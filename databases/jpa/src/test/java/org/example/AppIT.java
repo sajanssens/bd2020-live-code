@@ -16,7 +16,7 @@ import java.util.List;
 class AppIT {
 
     private final Logger log = LoggerFactory.getLogger(AppIT.class);
-    private final EntityManager em = Persistence.createEntityManagerFactory("MySQL-jpademo").createEntityManager();
+    private final EntityManager em = Persistence.createEntityManagerFactory("H2").createEntityManager();
     private final EmployeeDao dao = new EmployeeDao(em);
 
     @Test
