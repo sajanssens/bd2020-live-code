@@ -1,14 +1,14 @@
 package org.example;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 
 public class App {
 
-    private final Logger log = LoggerFactory.getLogger(App.class);
+    public static final EntityManager em = Persistence.createEntityManagerFactory("MySQL-jpademo").createEntityManager();
 
     public static void main(String[] args) {
-
+        new MainMenu().start();
     }
 
 }

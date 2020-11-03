@@ -27,13 +27,13 @@
         </Logger>-->
 
         <!--to show hibernate log statements:-->
-        <Logger name="org.hibernate" level="INFO"/>
+        <!--        <Logger name="org.hibernate" level="INFO"/>-->
 
         <!--to show binding parameter log statements:-->
-        <Logger name="org.hibernate.type.descriptor.sql" level="TRACE"/>
+        <!--        <Logger name="org.hibernate.type.descriptor.sql" level="TRACE"/>-->
 
         <Root level="debug">
-            <AppenderRef ref="console"/>
+            <AppenderRef ref="fileLogger"/>
         </Root>
     </Loggers>
 </Configuration>
