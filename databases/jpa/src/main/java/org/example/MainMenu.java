@@ -1,6 +1,6 @@
 package org.example;
 
-import java.util.Scanner;
+import static org.example.App.readLine;
 
 public class MainMenu {
 
@@ -10,13 +10,12 @@ public class MainMenu {
             System.out.println("Welkom bij het Medewerkers Management Systeem!");
             System.out.println("Wat wilt u doen?");
             System.out.println("----------------------------------------------");
-            System.out.println("(1) [Medewerkers raadplegen] ");
+
+            System.out.println("(1) [Medewerkers] ");
             System.out.println("(x) [Afsluiten] ");
 
-            Scanner scanner = new Scanner(System.in);
-            String s = scanner.nextLine();
             try {
-                switch (s) {
+                switch (readLine()) {
                     case "1":
                         new RaadplegenMedewerkers().start(); break;
                     case "x":

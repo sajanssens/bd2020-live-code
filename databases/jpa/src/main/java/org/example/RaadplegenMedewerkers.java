@@ -1,32 +1,30 @@
 package org.example;
 
-import org.example.dao.EmployeeDao;
 import org.example.domain.Employee;
 
-import java.util.Scanner;
-
-import static org.example.App.em;
+import static java.lang.Long.parseLong;
+import static org.example.App.empDao;
+import static org.example.App.readLine;
 
 public class RaadplegenMedewerkers {
-
-    EmployeeDao dao = new EmployeeDao(em);
 
     public void start() {
         while (true) {
             System.out.println("********* " + getClass().getSimpleName() + " *********");
             System.out.println("Dit zijn alle medewerkers: ");
 
-            dao.findAll().forEach(x -> System.out.println("\t" + x));
+            empDao.findAll().forEach(x -> System.out.println("\t" + x));
 
             System.out.println("Wat wilt u doen?");
             System.out.println("(1) [Medewerker verwijderen]");
+            System.out.println("(2) [Medewerker toevoegen]");
             System.out.println("(x) [Terug]");
 
-            Scanner scanner = new Scanner(System.in);
-            String s = scanner.nextLine();
-            switch (s) {
+            switch (readLine()) {
                 case "1":
                     remove(); break;
+                case "2":
+                    new ToevoegenMedewerker().start(); break;
                 case "x":
                     return;
                 default:
@@ -36,18 +34,17 @@ public class RaadplegenMedewerkers {
     }
 
     private void remove() {
-        System.out.println("Welke medewerker wilt u verwijderen (geef een id)?");
+        System.out.println("Welke medewerker wilt u verwijderen?");
+        System.out.print("Id: ");
 
-        Scanner scanner = new Scanner(System.in);
-        String s = scanner.nextLine();
-
-        Employee employee = dao.get(Long.parseLong(s));
+        String id = readLine();
+        Employee employee = empDao.get(parseLong(id));
         if (employee == null) {
-            System.out.println("Medewerker " + s + " niet gevonden...");
+            System.out.println("Medewerker " + id + " niet gevonden...");
             return;
         }
 
-        dao.remove(employee);
-        System.out.println("Medewerker " + s + " verwijderd.");
+        empDao.remove(employee);
+        System.out.println("Medewerker " + id + " verwijderd.");
     }
 }
