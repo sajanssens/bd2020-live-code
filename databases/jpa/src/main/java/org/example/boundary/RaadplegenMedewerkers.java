@@ -3,19 +3,29 @@ package org.example.boundary;
 import org.example.domain.Employee;
 
 import static java.lang.Long.parseLong;
-import static org.example.App.empDao;
-import static org.example.App.readLine;
+import static org.example.App.*;
 
 public class RaadplegenMedewerkers implements Boundary {
 
     private String zoeknaam = null;
+
+    // singleton design pattern begin -----------
+    private static RaadplegenMedewerkers self;
+
+    private RaadplegenMedewerkers() {}
+
+    public static synchronized RaadplegenMedewerkers raadplegenMedewerkers() {
+        if (self == null) self = new RaadplegenMedewerkers();
+        return self;
+    }
+    // singleton design pattern end -------------
 
     public void start() {
         while (true) {
             System.out.println("********* " + getClass().getSimpleName() + " *********");
             System.out.println("Dit zijn alle medewerkers: ");
 
-            empDao.findBy(zoeknaam).forEach(x -> System.out.println("\t" + x));
+            empDao.findBy(zoeknaam).forEach(e -> System.out.println("\t" + e));
 
             System.out.println("Wat wilt u doen?");
             System.out.println("(1) [Medewerker verwijderen]");
@@ -40,9 +50,8 @@ public class RaadplegenMedewerkers implements Boundary {
 
     private void remove() {
         System.out.println("Welke medewerker wilt u verwijderen?");
-        System.out.print("Id: ");
+        String id = prompt("Id: ");
 
-        String id = readLine();
         Employee employee = empDao.get(parseLong(id));
         if (employee == null) {
             System.out.println("Medewerker " + id + " niet gevonden...");
@@ -55,18 +64,13 @@ public class RaadplegenMedewerkers implements Boundary {
 
     private void add() {
         System.out.println("Toevoegen medewerker.");
-        System.out.print("Naam: ");
-
-        Employee e = new Employee(readLine());
-        empDao.save(e);
+        empDao.save(new Employee(prompt("Naam: ")));
         System.out.println("Medewerker toegevoegd!");
     }
 
     private void search() {
         System.out.println("Zoeken medewerker.");
-        System.out.print("Naam: ");
-
-        this.zoeknaam = readLine();
+        this.zoeknaam = prompt("Naam: ");
         System.out.println("Resultaten:");
     }
 }

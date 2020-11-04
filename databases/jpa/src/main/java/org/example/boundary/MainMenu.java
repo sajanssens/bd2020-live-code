@@ -1,6 +1,7 @@
 package org.example.boundary;
 
 import static org.example.App.readLine;
+import static org.example.boundary.RaadplegenMedewerkers.raadplegenMedewerkers;
 
 public class MainMenu implements Boundary {
 
@@ -17,7 +18,7 @@ public class MainMenu implements Boundary {
             try {
                 switch (readLine()) {
                     case "1":
-                        new RaadplegenMedewerkers().start(); break;
+                        raadplegenMedewerkers().start(); break;
                     case "x":
                         System.out.println("Tot ziens."); return;
                     default:
@@ -34,7 +35,6 @@ public class MainMenu implements Boundary {
                 System.out.println("Neem contact op met de leverancier.");
                 System.out.println("Tot ziens.");
             }
-
         }
 
     }

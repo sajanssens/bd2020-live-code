@@ -16,4 +16,10 @@ public class App {
     public static void main(String[] args) { new MainMenu().start(); }
 
     public static String readLine() { return scanner.nextLine(); }
+
+    public static String prompt(String message) {
+        System.out.print(message);
+        return scanner.nextLine();
+    }
+
 }
