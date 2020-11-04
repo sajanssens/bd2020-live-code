@@ -12,6 +12,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 public class EmployeeDao extends Dao<Employee, Long> {
 
     public EmployeeDao(EntityManager em) {
@@ -36,8 +38,12 @@ public class EmployeeDao extends Dao<Employee, Long> {
     // JPQL Queries examples:
 
     public List<Employee> findBy(String name) {
-        TypedQuery<Employee> query = em.createQuery("select e from Employee e where e.name LIKE :firstarg", Employee.class);
-        query.setParameter("firstarg", "%" + name + "%");
+        return isBlank(name) ? findAll() : findByName(name);
+    }
+
+    private List<Employee> findByName(String name) {
+        TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e WHERE UPPER(e.name) LIKE :firstarg", Employee.class);
+        query.setParameter("firstarg", "%" + name.toUpperCase() + "%");
         return query.getResultList();
     }
 

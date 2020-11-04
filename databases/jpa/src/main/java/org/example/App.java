@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.boundary.MainMenu;
 import org.example.dao.EmployeeDao;
 
 import javax.persistence.EntityManager;
@@ -12,9 +13,7 @@ public class App {
     public static final EmployeeDao empDao = new EmployeeDao(em);
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        new MainMenu().start();
-    }
+    public static void main(String[] args) { new MainMenu().start(); }
 
     public static String readLine() { return scanner.nextLine(); }
 }

@@ -1,8 +1,8 @@
-package org.example;
+package org.example.boundary;
 
 import static org.example.App.readLine;
 
-public class MainMenu {
+public class MainMenu implements Boundary {
 
     public void start() {
         while (true) {
