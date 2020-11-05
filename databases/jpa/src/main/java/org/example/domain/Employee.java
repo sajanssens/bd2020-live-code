@@ -4,9 +4,7 @@ import org.example.util.BooleanTFConverter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
@@ -67,6 +65,9 @@ public class Employee extends AbstractEntity<Long> { // POJO (plain old java obj
     @ManyToMany(/*mappedBy = "users", */cascade = CascadeType.PERSIST, fetch = LAZY)
     private List<Werkplek> flexwerkplekken = new LinkedList<>();
 
+    @OneToMany(mappedBy = "employee")
+    private Set<EmployeeCourse> courses = new HashSet<>();
+
     // ------------ code:
 
     public Employee() { }
@@ -113,5 +114,9 @@ public class Employee extends AbstractEntity<Long> { // POJO (plain old java obj
 
     public List<Werkplek> getFlexwerkplekken() {
         return flexwerkplekken;
+    }
+
+    public void addCourse(EmployeeCourse course) {
+        this.courses.add(course);
     }
 }

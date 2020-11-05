@@ -1,9 +1,6 @@
 package org.example;
 
-import org.example.dao.Dao;
-import org.example.dao.DepartmentDao;
-import org.example.dao.EmployeeDao;
-import org.example.dao.ParkingSpaceDao;
+import org.example.dao.*;
 import org.example.domain.*;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -16,8 +13,10 @@ import java.util.List;
 class AppIT {
 
     private final Logger log = LoggerFactory.getLogger(AppIT.class);
-    private final EntityManager em = Persistence.createEntityManagerFactory("H2").createEntityManager();
+    private final EntityManager em = Persistence.createEntityManagerFactory("jpademo-mysql").createEntityManager();
     private final EmployeeDao dao = new EmployeeDao(em);
+    private final CourseDao courseDao = new CourseDao(em);
+    private final EmployeeCourseDao employeeCourseDao = new EmployeeCourseDao(em);
 
     @Test
     void run() {
@@ -117,6 +116,21 @@ class AppIT {
         List<Employee> janssens = dao.findUsingCriteriaAPI("Janssens", false);
 
         // em: persist, find, merge, remove, createQuery, createNamedQuery
+    }
+
+    @Test
+    void enroll() {
+        Employee student = new Employee("Student");
+        dao.save(student);
+
+        Course java = new Course("Java");
+        courseDao.save(java);
+
+        EmployeeCourse e = new EmployeeCourse(student, java);
+        employeeCourseDao.saveAndDetach(e);
+
+        e.setRating(9);
+        employeeCourseDao.update(e);
     }
 
     @Test
