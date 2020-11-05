@@ -6,25 +6,32 @@
                     pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
         </Console>
 
-        <!-- append is false for test purposes so the logfiles are automatically overwritten. Don't use this on production. -->
-        <RollingFile name="fileLogger" append="false" fileName="logs/output.txt" filePattern="target/output-%d{yyyy-MM-dd}.%i.log">
+        <!-- append can be false for test purposes so the logfiles are automatically overwritten. Don't use this on production. -->
+        <RollingFile
+                name="fileLogger"
+                append="true"
+                fileName="logs/output.log"
+                filePattern="logs/output-%d{yyyy-MM-dd}.%i.log">
             <PatternLayout>
-                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+                <Pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</Pattern>
             </PatternLayout>
             <Policies>
                 <!-- Rolling once a day -->
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
                 <!-- Rolling based on size -->
-                <SizeBasedTriggeringPolicy size="2 KB"/>
+                <SizeBasedTriggeringPolicy size="200 KB"/>
             </Policies>
         </RollingFile>
     </Appenders>
 
     <Loggers>
         <!-- name should be a package to enable logging from those packages-->
-        <!--<Logger name="org.example" additivity="true">
-            <appender-ref ref="fileLogger" level="all"/>
-        </Logger>-->
+        <Logger name="org.example">
+            <appender-ref ref="fileLogger" level="debug"/>
+        </Logger>
+
+        <!--to show hibernate SQL statements:-->
+        <logger name="org.hibernate.SQL" level="debug"/>
 
         <!--to show hibernate log statements:-->
         <!--        <Logger name="org.hibernate" level="INFO"/>-->
