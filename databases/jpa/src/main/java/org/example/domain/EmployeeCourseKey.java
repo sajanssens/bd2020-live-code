@@ -1,6 +1,5 @@
 package org.example.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
@@ -9,26 +8,26 @@ import java.util.Objects;
 public class EmployeeCourseKey implements Serializable {
 
     // @Column(name = "employeeId")
-    private long employeeId;
+    private long eId;
     // @Column(name = "courseId")
-    private long courseId;
+    private long cId;
 
     public EmployeeCourseKey() { }
 
-    public EmployeeCourseKey(long employeeId, long courseId) {
-        this.employeeId = employeeId;
-        this.courseId = courseId;
+    public EmployeeCourseKey(long eId, long cId) {
+        this.eId = eId;
+        this.cId = cId;
     }
 
     @Override public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EmployeeCourseKey that = (EmployeeCourseKey) o;
-        return Objects.equals(employeeId, that.employeeId) &&
-                Objects.equals(courseId, that.courseId);
+        return Objects.equals(eId, that.eId) &&
+                Objects.equals(cId, that.cId);
     }
 
     @Override public int hashCode() {
-        return Objects.hash(employeeId, courseId);
+        return Objects.hash(eId, cId);
     }
 }

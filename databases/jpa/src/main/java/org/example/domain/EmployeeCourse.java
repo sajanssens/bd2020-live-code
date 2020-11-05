@@ -14,12 +14,12 @@ public class EmployeeCourse {
     private EmployeeCourseKey id;
 
     @ManyToOne(cascade = ALL)
-    @MapsId("employeeId") // field van EmployeeCourseKey; soort mappedBy voor composite key?
-    // @JoinColumn(name = "employeeId") // hoe willen we de column noemen?
+    @MapsId("eId") // field van EmployeeCourseKey; soort mappedBy voor de composite key
+    // @JoinColumn(name = "employeeId") // hoe willen we de column noemen (is optioneel)?
     private Employee employee;
 
     @ManyToOne(cascade = ALL)
-    @MapsId("courseId")
+    @MapsId("cId")
     // @JoinColumn(name = "courseId")
     private Course course;
 
