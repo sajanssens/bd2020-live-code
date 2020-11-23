@@ -15,6 +15,7 @@
         <module>unittesting</module>
         <module>jargenerator</module>
         <module>databases</module>
+        <module>javaee</module>
     </modules>
 
     <properties>

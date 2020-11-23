@@ -65,7 +65,7 @@ public class Employee extends AbstractEntity<Long> { // POJO (plain old java obj
     @ManyToMany(/*mappedBy = "users", */cascade = CascadeType.PERSIST, fetch = LAZY)
     private List<Werkplek> flexwerkplekken = new LinkedList<>();
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
     private Set<EmployeeCourse> courses = new HashSet<>();
 
     // ------------ code:

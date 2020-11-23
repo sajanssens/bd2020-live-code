@@ -21,15 +21,26 @@ public class StreamsDemo {
 
         System.out.println(oneven);
 
-        List<Integer> collect = getallen.stream() // creeer lopende band
-                .distinct()
-                .filter(g -> g % 2 != 0) // meerdere intermediate operations
-                .map(g -> g * 2)
-                .sorted()   // int op.
-                .flatMap(g -> Stream.of(g, g))
-                .collect(toList());// één terminal operation
+        // -----------
+
+        List<Integer> collect =
+                getallen.stream() // creeer lopende band
+                        .distinct()
+                        .filter(g -> g % 2 != 0) // meerdere intermediate operations
+                        .map(g -> g * 2)
+                        .sorted()   // int op.
+                        .flatMap(g -> Stream.of(g, g))
+                        .collect(toList());// één terminal operation
 
         System.out.println(collect);
+
+        /// ------------
+
+        getallen.stream()
+                .map(g -> g * 2)
+                .collect(toList());
+
+
 
     }
 }

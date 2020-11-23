@@ -29,6 +29,7 @@ public class MainMenu implements Boundary {
             } catch (RuntimeException t) {
                 System.out.println("Er ging iets mis... Probeer het opnieuw. ");
                 System.out.println("Foutmelding: " + t.getMessage());
+                t.printStackTrace();
             } catch (Exception e) {
                 System.out.println("Er ging iets vreselijk mis... ");
                 System.out.println("Foutmelding: " + e.getMessage());
