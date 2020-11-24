@@ -13,7 +13,9 @@ public class ContactsResource implements JsonResource {
     private static final ContactDao dao = new ContactDao();
 
     @GET
-    public Collection<Contact> getAll() { return dao.getAll(); }
+    public Collection<Contact> getAll(@QueryParam("q") String q) {
+        return q == null ? dao.getAll() : dao.get(q);
+    }
 
     @POST
     public Contact post(Contact c) {
