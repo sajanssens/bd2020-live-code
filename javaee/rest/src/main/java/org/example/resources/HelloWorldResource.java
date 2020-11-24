@@ -21,15 +21,15 @@ public class HelloWorldResource {
     }
 
     // endpoint @ /helloworld
-    @POST
-    public Response post(String requestBody, @Context UriInfo uriInfo) {
-        String body = requestBody != null ? requestBody : "";
-        UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder().path("a_new_location");
-        return Response
-                .created(uriBuilder.build()) // header: 201 CREATED at path ...
-                .entity("Hello posted world! " + body) // content
-                .build();
-    }
+    // @POST
+    // public Response post(String requestBody, @Context UriInfo uriInfo) {
+    //     String body = requestBody != null ? requestBody : "";
+    //     UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder().path("a_new_location");
+    //     return Response
+    //             .created(uriBuilder.build()) // header: 201 CREATED at path ...
+    //             .entity("Hello posted world! " + body) // content
+    //             .build();
+    // }
 
     // endpoint @ /helloworld/q?n=...
     @GET @Path("/q")
