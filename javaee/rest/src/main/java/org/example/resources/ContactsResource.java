@@ -38,7 +38,7 @@ public class ContactsResource /*implements JsonResource */ {
     @DELETE @Path("{id}")
     public void delete(@PathParam("id") String id) {
         if (!dao.remove(id)) {
-            throw new RuntimeException("Delete contact with id " + id + " failed.");
+            throw new BadRequestException("Delete contact with id " + id + " failed.");
         }
     }
 
