@@ -30,7 +30,7 @@ public class ContactsResourceIT {
     private URL deploymentURL;
 
     private String contactsResource;
-    private String contactsUri = "resources/contacts";
+    private String contactsUri = "api/contacts";
 
     @Before
     public void setup() {
@@ -39,7 +39,7 @@ public class ContactsResourceIT {
 
     @Deployment
     public static Archive<?> createDeployment() {
-        WebArchive archive = ShrinkWrap.create(WebArchive.class, "rest.war")
+        WebArchive archive = ShrinkWrap.create(WebArchive.class, "ContactsResourceIT.war")
                 .addClass(App.class) // dont forget!
                 .addClass(ContactsResource.class)
                 .addClass(Contact.class)
