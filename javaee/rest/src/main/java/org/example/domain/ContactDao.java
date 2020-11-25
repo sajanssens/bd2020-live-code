@@ -24,7 +24,8 @@ public class ContactDao implements IContactDao {
                 Contact.builder().id(nextId()).firstName("Sammie").surname("Smith").email("sam.smith@music.com").build(),
                 Contact.builder().id(nextId()).firstName("Frank").surname("Muscles").email("frank@muscles.com").build(),
                 Contact.builder().id(nextId()).firstName("Eddy").surname("Valentino").email("eddy@valfam.co.uk").build(),
-                Contact.builder().id(nextId()).firstName("Bram").surname("Janssens").email("s.a.janssens@gmail.com").build()
+                Contact.builder().id(nextId()).firstName("Bram").surname("Janssens").email("s.a.janssens@gmail.com")
+                        .laptop(Laptop.builder().brand("DELL").id("a635634-fcd37846y").price(813.98).build()).build()
         );
 
         this.contacts = contacts.stream().collect(toMap(Contact::getId, c -> c));
@@ -32,6 +33,10 @@ public class ContactDao implements IContactDao {
 
     public Collection<Contact> getAll() {
         return contacts.values();
+    }
+
+    public Contact getById(String id) {
+        return this.contacts.get(id);
     }
 
     public Collection<Contact> get(String q) {

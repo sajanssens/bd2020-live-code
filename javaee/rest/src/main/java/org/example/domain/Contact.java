@@ -21,9 +21,11 @@ public class Contact {
 
     @Id
     private String id;
-
+// UUID Universally unique ID
     private String firstName;
     private String surname;
     private String email;
+
+    private Laptop laptop;
 
 }

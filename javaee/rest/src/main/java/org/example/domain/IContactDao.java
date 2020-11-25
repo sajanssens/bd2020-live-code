@@ -6,6 +6,8 @@ public interface IContactDao {
 
     Collection<Contact> getAll();
 
+    Contact getById(String id);
+
     Collection<Contact> get(String q);
 
     boolean add(Contact c);
