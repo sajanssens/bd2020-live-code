@@ -5,16 +5,14 @@ import org.example.domain.IContactDao;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import java.util.Collection;
 
 @Path("/contacts")
 // http://localhost:9080/rest/api/contacts
-@Produces(MediaType.APPLICATION_JSON)
-public class ContactsResource /*implements JsonResource */ {
+public class ContactsResource implements JsonResource  {
 
     @Inject
-    private IContactDao dao/* = new ContactDao()*/;
+    private IContactDao dao;
 
     @GET
     public Collection<Contact> getAll(@QueryParam("q") String q) {

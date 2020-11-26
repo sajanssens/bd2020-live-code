@@ -1,6 +1,7 @@
 package org.example.domain;
 
 import javax.ejb.Singleton;
+import javax.enterprise.inject.Alternative;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.function.Predicate;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
-// @Alternative
+@Alternative
 @Singleton
 public class ContactDao implements IContactDao {
 

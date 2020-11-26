@@ -46,10 +46,10 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
+        <!-- <dependency>
+             <groupId>mysql</groupId>
+             <artifactId>mysql-connector-java</artifactId>
+         </dependency>-->
         <!-- 1. Arquillian JUnit integration framework (required at all times) -->
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
