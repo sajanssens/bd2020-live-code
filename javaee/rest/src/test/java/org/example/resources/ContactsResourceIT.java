@@ -2,7 +2,7 @@ package org.example.resources;
 
 import org.example.App;
 import org.example.domain.Contact;
-import org.example.domain.ContactDaoMock;
+import org.example.domain.ContactDaoDB;
 import org.example.domain.IContactDao;
 import org.example.domain.Laptop;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,8 +45,9 @@ public class ContactsResourceIT {
                 .addClass(Contact.class)
                 .addClass(Laptop.class)
                 .addClass(IContactDao.class)
-                .addClass(ContactDaoMock.class)
-                .addAsWebInfResource("test-beans.xml", "beans.xml");
+                .addClass(ContactDaoDB.class)
+                .addAsWebInfResource("test-beans.xml", "beans.xml")
+                .addAsResource("test-persistence.xml", "META-INF/persistence.xml");
         System.out.println(archive.toString(true));
         return archive;
     }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-    <alternatives>
+    <!--<alternatives>
         <class>org.example.domain.ContactDaoMock</class>
-    </alternatives>
+    </alternatives>-->
     <!--
     <interceptors></interceptors>
     <decorators></decorators>
