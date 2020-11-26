@@ -7,10 +7,6 @@
     </featureManager>
 
     <!--JPA:-->
-    <!--
-        <jpa defaultPersistenceProvider="org.hibernate.jpa.HibernatePersistenceProvider"/>
-    -->
-
     <!-- H2 for arquillian integration tests -->
     <dataSource id="h2test" jndiName="jdbc/h2">
         <jdbcDriver libraryRef="H2Lib"/>

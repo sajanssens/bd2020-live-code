@@ -21,15 +21,19 @@ public class ContactDaoDB implements IContactDao {
     @Override
     public Contact getById(String id) { return null; }
 
-    @Override public Collection<Contact> get(String q) {
+    @Override
+    public Collection<Contact> get(String q) {
         return null;
     }
 
-    @Override public boolean add(Contact c) {
-        return false;
+    @Override
+    public boolean add(Contact c) {
+        em.persist(c);
+        return true; // Fix me ...
     }
 
-    @Override public boolean remove(String id) {
+    @Override
+    public boolean remove(String id) {
         return false;
     }
 
