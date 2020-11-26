@@ -5,8 +5,8 @@
     <container qualifier="wlp" default="true">
         <configuration>
             <!-- for managed -->
-            <property name="wlpHome">C:\Java\wlp-webProfile8-20.0.0.12\wlp</property>
-            <!--<property name="wlpHome">target/liberty/wlp</property>-->
+            <!--<property name="wlpHome">C:\Java\wlp-webProfile8-20.0.0.12\wlp</property>-->
+            <property name="wlpHome">target/liberty/wlp</property>
 
             <!-- for remote -->
             <!--
