@@ -2,7 +2,7 @@ package org.example.resources;
 
 import org.example.App;
 import org.example.domain.Contact;
-import org.example.domain.ContactDao;
+import org.example.domain.ContactDaoMock;
 import org.example.domain.IContactDao;
 import org.example.domain.Laptop;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javax.ws.rs.BadRequestException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import java.net.URL;
@@ -41,12 +40,13 @@ public class ContactsResourceIT {
     public static Archive<?> createDeployment() {
         WebArchive archive = ShrinkWrap.create(WebArchive.class, "ContactsResourceIT.war")
                 .addClass(App.class) // dont forget!
+                .addClass(JsonResource.class)
                 .addClass(ContactsResource.class)
                 .addClass(Contact.class)
                 .addClass(Laptop.class)
                 .addClass(IContactDao.class)
-                .addClass(BadRequestException.class)
-                .addClass(ContactDao.class);
+                .addClass(ContactDaoMock.class)
+                .addAsWebInfResource("test-beans.xml", "beans.xml");
         System.out.println(archive.toString(true));
         return archive;
     }

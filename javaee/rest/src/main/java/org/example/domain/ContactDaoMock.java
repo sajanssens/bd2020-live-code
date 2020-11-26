@@ -12,14 +12,14 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 @Alternative
-@Singleton
-public class ContactDao implements IContactDao {
+@Singleton // this is the javax.ejb.Singleton, NOT javax.inject.Singleton!
+public class ContactDaoMock implements IContactDao {
 
     private int maxId = 0;
 
     private final Map<String, Contact> contacts;
 
-    public ContactDao() {
+    public ContactDaoMock() {
         List<Contact> contacts = Arrays.asList(
                 Contact.builder().id(nextId()).firstName("Sammie").surname("Smith").email("sam.smith@music.com").build(),
                 Contact.builder().id(nextId()).firstName("Frank").surname("Muscles").email("frank@muscles.com").build(),

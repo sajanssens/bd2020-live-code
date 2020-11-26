@@ -6,9 +6,9 @@ import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ContactDaoTest {
+class ContactDaoMockTest {
 
-    private final ContactDao target = new ContactDao();
+    private final ContactDaoMock target = new ContactDaoMock();
 
     @Test
     void add() {

@@ -1,14 +1,12 @@
 package org.example.domain;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collection;
 import java.util.List;
 
 // @Alternative
-// @Default
 @Stateless
 public class ContactDaoDB implements IContactDao {
 
