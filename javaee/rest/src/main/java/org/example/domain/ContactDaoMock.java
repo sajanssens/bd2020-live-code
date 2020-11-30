@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 @Alternative
-@Singleton // this is the javax.ejb.Singleton, NOT javax.inject.Singleton!
+@Singleton// this is the javax.ejb.Singleton, NOT javax.inject.Singleton!
 public class ContactDaoMock implements IContactDao {
 
     private int maxId = 0;
