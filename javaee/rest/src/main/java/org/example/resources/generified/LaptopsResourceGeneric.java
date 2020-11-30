@@ -1,6 +1,6 @@
 package org.example.resources.generified;
 
-import org.example.domain.Dao;
+import org.example.domain.generified.Dao;
 import org.example.domain.Laptop;
 import org.example.resources.JsonResource;
 

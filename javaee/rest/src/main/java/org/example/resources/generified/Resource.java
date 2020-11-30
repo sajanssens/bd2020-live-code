@@ -1,6 +1,6 @@
 package org.example.resources.generified;
 
-import org.example.domain.Dao;
+import org.example.domain.generified.Dao;
 
 import javax.ws.rs.*;
 import java.util.Collection;

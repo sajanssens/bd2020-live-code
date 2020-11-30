@@ -1,7 +1,7 @@
 package org.example.resources.generified;
 
 import org.example.domain.Contact;
-import org.example.domain.Dao;
+import org.example.domain.generified.Dao;
 import org.example.resources.JsonResource;
 
 import javax.inject.Inject;

@@ -1,7 +1,8 @@
 package org.example.resources;
 
 import org.example.domain.Contact;
-import org.example.domain.Dao;
+import org.example.domain.ContactDaoDB;
+import org.example.domain.generified.Dao;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -12,7 +13,7 @@ import java.util.Collection;
 public class ContactsResource implements JsonResource {
 
     @Inject
-    private Dao<Contact> dao;
+    private ContactDaoDB dao;
 
     @GET
     public Collection<Contact> getAll(@QueryParam("q") String q) {

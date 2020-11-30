@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import org.example.domain.generified.Dao;
+
 import javax.ejb.Singleton;
 import javax.enterprise.inject.Alternative;
 import java.util.Arrays;
@@ -13,7 +15,7 @@ import static java.util.stream.Collectors.toMap;
 
 @Alternative
 @Singleton// this is the javax.ejb.Singleton, NOT javax.inject.Singleton!
-public class ContactDaoMock implements Dao<Contact> {
+public class ContactDaoMock extends Dao<Contact> {
 
     private int maxId = 0;
 
@@ -31,10 +33,12 @@ public class ContactDaoMock implements Dao<Contact> {
         this.contacts = contacts.stream().collect(toMap(Contact::getId, c -> c));
     }
 
+    @Override
     public Collection<Contact> getAll() {
         return contacts.values();
     }
 
+    @Override
     public Contact getById(String id) {
         return this.contacts.get(id);
     }
