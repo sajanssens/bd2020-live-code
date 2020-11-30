@@ -7,16 +7,11 @@
         <groupId>org.example</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <artifactId>javase</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.example</groupId>
-    <artifactId>javase</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>cdi</module>
-    </modules>
 
     <dependencies>
         <dependency>
