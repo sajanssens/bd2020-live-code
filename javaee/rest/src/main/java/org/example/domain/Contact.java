@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
@@ -21,6 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Contact {
 
     @Id
+    @GeneratedValue
     private String id;  // UUID Universally unique ID
     private String firstName;
     private String surname;

@@ -1,15 +1,13 @@
 package org.example.domain;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collection;
 import java.util.List;
 
-@Default
 @Stateless
-public class ContactDaoDB implements IContactDao {
+public class ContactDaoDB implements Dao<Contact> {
 
     @PersistenceContext // Container managed persistence context
     private EntityManager em;

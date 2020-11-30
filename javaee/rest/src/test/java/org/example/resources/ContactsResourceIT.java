@@ -3,7 +3,7 @@ package org.example.resources;
 import org.example.App;
 import org.example.domain.Contact;
 import org.example.domain.ContactDaoDB;
-import org.example.domain.IContactDao;
+import org.example.domain.Dao;
 import org.example.domain.Laptop;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -46,7 +46,7 @@ public class ContactsResourceIT {
                 .addClass(ContactsResource.class)
                 .addClass(Contact.class)
                 .addClass(Laptop.class)
-                .addClass(IContactDao.class)
+                .addClass(Dao.class)
                 .addClass(ContactDaoDB.class)
                 .addAsWebInfResource("test-beans.xml", "beans.xml")
                 .addAsWebInfResource("test-persistence.xml", "classes/META-INF/persistence.xml");

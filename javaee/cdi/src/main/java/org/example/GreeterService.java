@@ -9,14 +9,12 @@ public class GreeterService {
     @Inject
     private Logger log;
 
-    @Inject
-    private Greetable greeting = null; // talk to an interface, not an implementation
+    private Greetable greeting; // talk to an interface, not an implementation
 
+    @Inject // constructor injection
     public GreeterService(Greetable greeting) {
         this.greeting = greeting;
     }
-
-    public GreeterService() { }
 
     public String saySomething() {
         log.debug("saySomething");

@@ -1,7 +1,7 @@
 package org.example.resources;
 
 import org.example.domain.Contact;
-import org.example.domain.IContactDao;
+import org.example.domain.Dao;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -9,10 +9,10 @@ import java.util.Collection;
 
 @Path("/contacts")
 // http://localhost:9080/rest/api/contacts
-public class ContactsResource implements JsonResource  {
+public class ContactsResource implements JsonResource {
 
     @Inject
-    private IContactDao dao;
+    private Dao<Contact> dao;
 
     @GET
     public Collection<Contact> getAll(@QueryParam("q") String q) {
