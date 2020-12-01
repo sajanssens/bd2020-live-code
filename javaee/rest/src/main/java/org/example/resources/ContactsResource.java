@@ -1,8 +1,7 @@
 package org.example.resources;
 
 import org.example.domain.Contact;
-import org.example.domain.ContactDaoDB;
-import org.example.domain.generified.Dao;
+import org.example.domain.generified.ContactDaoDB;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

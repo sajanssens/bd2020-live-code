@@ -2,7 +2,7 @@ package org.example.resources;
 
 import org.example.App;
 import org.example.domain.Contact;
-import org.example.domain.ContactDaoDB;
+import org.example.domain.generified.ContactDaoDB;
 import org.example.domain.generified.Dao;
 import org.example.domain.Laptop;
 import org.jboss.arquillian.container.test.api.Deployment;
