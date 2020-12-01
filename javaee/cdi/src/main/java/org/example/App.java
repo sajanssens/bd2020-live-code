@@ -16,9 +16,15 @@ public class App {
         String s = greeterService.saySomething();
         System.out.println(s);
 
-        GreeterService greeterService2 = new GreeterService(new GreetingNL());
-        String s2 = greeterService2.saySomething();
-        System.out.println(s2);
+        s = greeterService.sayNl();
+        System.out.println(s);
+
+        s = greeterService.sayAll();
+        System.out.println(s);
+
+        // GreeterService greeterService2 = new GreeterService(new GreetingNL());
+        // String s2 = greeterService2.saySomething();
+        // System.out.println(s2);
 
         container.close();
     }
