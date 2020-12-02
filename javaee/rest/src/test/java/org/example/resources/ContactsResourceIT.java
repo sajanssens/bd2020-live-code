@@ -2,9 +2,9 @@ package org.example.resources;
 
 import org.example.App;
 import org.example.domain.Contact;
+import org.example.domain.Laptop;
 import org.example.domain.generified.ContactDaoDB;
 import org.example.domain.generified.Dao;
-import org.example.domain.Laptop;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -49,7 +49,8 @@ public class ContactsResourceIT {
                 .addClass(Dao.class)
                 .addClass(ContactDaoDB.class)
                 .addAsWebInfResource("test-beans.xml", "beans.xml")
-                .addAsWebInfResource("test-persistence.xml", "classes/META-INF/persistence.xml");
+                .addAsResource("test-persistence.xml", "META-INF/persistence.xml");
+
         System.out.println(archive.toString(true));
         return archive;
     }
