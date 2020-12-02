@@ -8,25 +8,29 @@ import java.util.Collection;
 public abstract class Dao<E> {
 
     @PersistenceContext // Container managed persistence context
-    private EntityManager em;
+    protected EntityManager em;
 
     public Collection<E> getAll() {
         return em.createNamedQuery(typeSimple() + ".findAll", E()).getResultList();
     }
 
-    public E getById(String id) { return null; }
+    public E getById(String id) { return em.find(E(), id); }
 
     public Collection<E> get(String q) {
         return null;
     }
 
-    public boolean add(E c) {
+    public E add(E c) {
         em.persist(c);
-        return true; // Fix me ...
+        return c;
     }
 
     public boolean remove(String id) {
-        return false;
+        E e = em.find(E(), id);
+        if (e == null) return false;
+
+        em.remove(e);
+        return true;
     }
 
     public boolean update(String id, E c) {

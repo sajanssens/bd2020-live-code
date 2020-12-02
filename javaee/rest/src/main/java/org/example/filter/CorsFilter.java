@@ -1,4 +1,4 @@
-package org.example.util;
+package org.example.filter;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;

@@ -53,9 +53,9 @@ public class ContactDaoMock extends Dao<Contact> {
                 .collect(toList());
     }
 
-    public boolean add(Contact c) {
+    public Contact add(Contact c) {
         if (c.getId() == null) c.setId(nextId());
-        return this.contacts.put(c.getId(), c) == null;
+        return this.contacts.put(c.getId(), c);
     }
 
     public boolean remove(String id) {

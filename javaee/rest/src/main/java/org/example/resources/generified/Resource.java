@@ -9,6 +9,10 @@ public abstract class Resource<E> {
 
     protected Dao<E> dao;
 
+    public abstract void setDao(Dao<E> dao);
+
+    // public abstract Dao<E> getDao();
+
     @GET
     public Collection<E> getAll(@QueryParam("q") String q) {
         return q == null ? dao.getAll() : dao.get(q);
@@ -21,7 +25,7 @@ public abstract class Resource<E> {
 
     @POST
     public E post(E e) {
-        if (dao.add(e)) {
+        if (dao.add(e) != null) {
             return e;
         } else {
             throw new RuntimeException("Post " + e + " failed.");
