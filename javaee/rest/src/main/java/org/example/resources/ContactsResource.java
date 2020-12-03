@@ -2,7 +2,6 @@ package org.example.resources;
 
 import org.example.domain.Contact;
 import org.example.domain.generified.ContactDaoDB;
-import org.example.filter.JWTTokenNeeded;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -10,6 +9,7 @@ import java.util.Collection;
 
 @Path("/contacts")
 // http://localhost:9080/rest/api/contacts
+// @Authorized
 public class ContactsResource implements JsonResource {
 
     @Inject
@@ -21,7 +21,6 @@ public class ContactsResource implements JsonResource {
     }
 
     @GET @Path("{id}")
-    @JWTTokenNeeded
     public Contact get(@PathParam("id") String id) {
         return dao.getById(id);
     }

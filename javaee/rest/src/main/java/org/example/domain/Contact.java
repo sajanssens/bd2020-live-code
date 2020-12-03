@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -23,6 +24,8 @@ public class Contact {
     private String firstName;
     private String surname;
     private String email;
+
+    private LocalDate dateOfBirth;
 
     @ManyToOne
     private Laptop laptop;
