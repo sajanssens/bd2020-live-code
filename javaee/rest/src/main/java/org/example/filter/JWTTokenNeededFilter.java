@@ -16,7 +16,7 @@ import java.security.Key;
 import java.util.logging.Logger;
 
 @Provider
-@JWTTokenNeeded
+@Authorized
 @Priority(Priorities.AUTHENTICATION)
 public class JWTTokenNeededFilter implements ContainerRequestFilter {
 
