@@ -143,6 +143,7 @@
     <build>
         <pluginManagement>
             <plugins>
+                <!-- To let maven pick up Junit 5 tests we need a recent version of surefire.-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>

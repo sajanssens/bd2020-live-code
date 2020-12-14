@@ -16,7 +16,7 @@ import static java.util.UUID.randomUUID;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u ORDER BY u.lastName DESC"),
-        @NamedQuery(name = User.FIND_BY_LOGIN_PASSWORD, query = "SELECT u FROM User u WHERE u.login = :login AND u.password = :password")
+        @NamedQuery(name = User.FIND_BY_LOGIN_PASSWORD, query = "SELECT u FROM User u WHERE u.username = :login AND u.password = :password")
 })
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -24,7 +24,7 @@ import static java.util.UUID.randomUUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements AbstractEntity<String> {
 
     public static final String FIND_BY_LOGIN_PASSWORD = "User.findByLoginAndPassword";
 
@@ -36,10 +36,12 @@ public class User {
     private String firstName;
 
     @Column(length = 10, nullable = false)
-    private String login;
+    private String username;
 
     @Column(length = 256, nullable = false)
     private String password;
+
+    private String token;
 
     // ======================================
     // =         Lifecycle methods          =

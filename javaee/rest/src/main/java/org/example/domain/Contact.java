@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @NamedQuery(name = "Contact.findAll", query = "select c from Contact c")
-public class Contact {
+public class Contact implements AbstractEntity<String> {
 
     @Id
     @GeneratedValue

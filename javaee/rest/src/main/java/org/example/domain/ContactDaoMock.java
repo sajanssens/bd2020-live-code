@@ -62,8 +62,8 @@ public class ContactDaoMock extends Dao<Contact> {
         return this.contacts.remove(id) != null;
     }
 
-    public boolean update(String id, Contact c) {
-        return this.contacts.put(id, c) != null;
+    public Contact update(String id, Contact c) {
+        return this.contacts.put(id, c);
     }
 
     private String nextId() { return ++maxId + ""; }

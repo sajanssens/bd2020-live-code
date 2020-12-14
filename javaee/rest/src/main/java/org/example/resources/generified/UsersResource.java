@@ -9,9 +9,11 @@ import org.example.resources.JsonResource;
 import org.example.util.KeyGenerator;
 
 import javax.inject.Inject;
+import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.security.Key;
@@ -41,19 +43,42 @@ public class UsersResource extends Resource<User> implements JsonResource {
 
     public UserDao getDao() { return (UserDao) this.dao; }
 
-    @POST @Path("/login")
-    public Response authenticateUser(User u) {
+    @POST @Path("/login2")
+    public Response login2(User u) {
         try {
-            String login = u.getLogin();
+            String login = u.getUsername();
             String password = u.getPassword();
-            // log.info("#### login/password : " + login + "/" + password);
 
             getDao().authenticate(login, password);
             String token = issueToken(login);
+            u.setToken(token);
+            u.setPassword("");
 
-            return Response.ok().header(AUTHORIZATION, "Bearer " + token).build();
+            return Response.ok()
+                    .type(MediaType.APPLICATION_JSON_TYPE)
+                    .header(AUTHORIZATION, "Bearer " + token)
+                    .entity(u)
+                    .build();
         } catch (Exception e) {
             return Response.status(UNAUTHORIZED).build();
+        }
+    }
+
+    @POST @Path("/login")
+    public User login(User u) {
+        try {
+            String login = u.getUsername();
+            String password = u.getPassword();
+
+            User user = getDao().authenticate(login, password);
+            String token = issueToken(login);
+            user.setToken(token);
+
+            // return Response.ok().header(AUTHORIZATION, "Bearer " + token)./*entity(u).*/build();
+            return user;
+        } catch (Exception e) {
+            // return Response.status(UNAUTHORIZED).build();
+            throw new NotAuthorizedException("User " + u + " is not authorized.");
         }
     }
 

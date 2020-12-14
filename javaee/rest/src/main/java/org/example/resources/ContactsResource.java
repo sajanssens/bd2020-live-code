@@ -2,6 +2,7 @@ package org.example.resources;
 
 import org.example.domain.Contact;
 import org.example.domain.generified.ContactDaoDB;
+import org.example.filter.Authorized;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -9,7 +10,6 @@ import java.util.Collection;
 
 @Path("/contacts")
 // http://localhost:9080/rest/api/contacts
-// @Authorized
 public class ContactsResource implements JsonResource {
 
     @Inject
@@ -20,6 +20,7 @@ public class ContactsResource implements JsonResource {
         return q == null ? dao.getAll() : dao.get(q);
     }
 
+    @Authorized
     @GET @Path("{id}")
     public Contact get(@PathParam("id") String id) {
         return dao.getById(id);
@@ -43,11 +44,7 @@ public class ContactsResource implements JsonResource {
 
     @PUT @Path("{id}")
     public Contact put(@PathParam("id") String id, Contact c) {
-        if (dao.update(id, c)) {
-            return c;
-        } else {
-            throw new RuntimeException("Update contact " + c + " failed.");
-        }
+        return dao.update(id, c);
     }
 
 }

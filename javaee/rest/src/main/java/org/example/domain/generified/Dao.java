@@ -1,11 +1,14 @@
 package org.example.domain.generified;
 
+import org.example.domain.AbstractEntity;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.BadRequestException;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 
-public abstract class Dao<E> {
+public abstract class Dao<E extends AbstractEntity<String>> {
 
     @PersistenceContext // Container managed persistence context
     protected EntityManager em;
@@ -33,8 +36,12 @@ public abstract class Dao<E> {
         return true;
     }
 
-    public boolean update(String id, E c) {
-        return false;
+    public E update(String id, E e) {
+        E found = em.find(E(), id);
+        if (found == null) throw new BadRequestException("Entity with id " + id + " not found.");
+
+        e.setId(id);
+        return em.merge(e);
     }
 
     private String typeSimple() { return E().getSimpleName(); }

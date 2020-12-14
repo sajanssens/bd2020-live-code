@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @AllArgsConstructor
 @Entity
 @NamedQuery(name = "Laptop.findAll", query = "select c from Laptop c")
-public class Laptop {
+public class Laptop implements AbstractEntity<String> {
 
     @Id
     private String id; // UUID Universally unique ID

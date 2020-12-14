@@ -1,10 +1,11 @@
 package org.example.resources;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
 
 // http://localhost:9080/rest/api/helloworld
 @Path("/helloworld")
@@ -16,7 +17,8 @@ public class HelloWorldResource {
         String n = name != null ? name : "";
         return Response
                 .ok() // header: 200 OK
-                .entity("Hello world! " + n) // content
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .entity("{ \"message\": \"Hello world! " + n + "\"}") // content
                 .build();
     }
 
