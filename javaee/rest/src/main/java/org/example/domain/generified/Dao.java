@@ -4,6 +4,7 @@ import org.example.domain.AbstractEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
@@ -20,7 +21,9 @@ public abstract class Dao<E extends AbstractEntity<String>> {
     public E getById(String id) { return em.find(E(), id); }
 
     public Collection<E> get(String q) {
-        return null;
+        TypedQuery<E> namedQuery = em.createNamedQuery(typeSimple() + ".search", E());
+        namedQuery.setParameter("q", "%" + q + "%");
+        return namedQuery.getResultList();
     }
 
     public E add(E c) {

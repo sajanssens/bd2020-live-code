@@ -15,7 +15,17 @@ import java.time.LocalDate;
 @NoArgsConstructor // idem
 @AllArgsConstructor
 @Entity
-@NamedQuery(name = "Contact.findAll", query = "select c from Contact c")
+@NamedQueries({
+        @NamedQuery(
+                name = "Contact.findAll",
+                query = "select c from Contact c"),
+        @NamedQuery(
+                name = "Contact.search",
+                query = "select c from Contact c " +
+                        "where c.surname LIKE :q " +
+                        "OR c.firstName LIKE :q " +
+                        "OR c.email LIKE :q"),
+})
 public class Contact implements AbstractEntity<String> {
 
     @Id
