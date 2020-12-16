@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 @NamedQueries({
         @NamedQuery(
                 name = "Contact.findAll",
-                query = "select c from Contact c"),
+                query = "select distinct c from Contact c LEFT OUTER JOIN c.laptops ls"),
         @NamedQuery(
                 name = "Contact.search",
                 query = "select c from Contact c " +
@@ -39,5 +40,12 @@ public class Contact implements AbstractEntity<String> {
 
     @ManyToOne
     private Laptop laptop;
+
+    @OneToMany
+    private List<Laptop> laptops;
+
+    // @JsonIgnoreProperties??
+    // @OneToMany(mappedBy = "owner")
+    // private List<Laptop> laptopsBidi;
 
 }
