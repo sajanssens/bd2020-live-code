@@ -5,10 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 import java.util.List;
+
+import static javax.persistence.CascadeType.PERSIST;
 
 @Data
 @Builder
@@ -36,12 +39,13 @@ public class Contact implements AbstractEntity<String> {
     private String surname;
     private String email;
 
+    @JsonbTransient // for example
     private LocalDate dateOfBirth;
 
-    @ManyToOne
+    @ManyToOne(cascade = PERSIST)
     private Laptop laptop;
 
-    @OneToMany
+    @OneToMany(cascade = PERSIST)
     private List<Laptop> laptops;
 
     // @JsonIgnoreProperties??

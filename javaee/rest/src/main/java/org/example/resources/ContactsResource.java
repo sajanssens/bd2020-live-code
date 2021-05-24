@@ -1,6 +1,7 @@
 package org.example.resources;
 
 import org.example.domain.Contact;
+import org.example.domain.ContactDaoMock;
 import org.example.domain.generified.ContactDaoDB;
 import org.example.filter.Authorized;
 
@@ -47,4 +48,11 @@ public class ContactsResource implements JsonResource {
         return dao.update(id, c);
     }
 
+    @GET @Path("init")
+    public void init(@QueryParam("del") String del) {
+        if (del != null) dao.deleteAll();
+        new ContactDaoMock().getAll().forEach(c -> dao.add(c));
+    }
+
 }
+

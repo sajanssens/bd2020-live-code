@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
@@ -26,8 +28,10 @@ public class Laptop implements AbstractEntity<String> {
     // JEE7 JSON-P Processing API
     // JEE8 JSON-B Binding API .. @JsonbTransient/@JsonbIgnore
 
+    // BiDi not working combined with json, @JsonbTransient not picked up..
     // @ManyToOne
     // @JoinColumn(name = "ownerId")
+    // @JsonbTransient
     // private Contact owner;
 
 }

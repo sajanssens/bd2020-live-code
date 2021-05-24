@@ -4,10 +4,7 @@ import org.example.domain.generified.Dao;
 
 import javax.ejb.Singleton;
 import javax.enterprise.inject.Alternative;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.toList;
@@ -23,11 +20,11 @@ public class ContactDaoMock extends Dao<Contact> {
 
     public ContactDaoMock() {
         List<Contact> contacts = Arrays.asList(
-                Contact.builder().id(nextId()).firstName("Sammie").surname("Smith").email("sam.smith@music.com").build(),
-                Contact.builder().id(nextId()).firstName("Frank").surname("Muscles").email("frank@muscles.com").build(),
-                Contact.builder().id(nextId()).firstName("Eddy").surname("Valentino").email("eddy@valfam.co.uk").build(),
-                Contact.builder().id(nextId()).firstName("Bram").surname("Janssens").email("s.a.janssens@gmail.com")
-                        .laptop(Laptop.builder().brand("DELL").id("a635634-fcd37846y").price(813.98).build()).build()
+                Contact.builder().id(nextUUID()).firstName("Sammie").surname("Smith").email("sam.smith@music.com").build(),
+                Contact.builder().id(nextUUID()).firstName("Frank").surname("Muscles").email("frank@muscles.com").build(),
+                Contact.builder().id(nextUUID()).firstName("Eddy").surname("Valentino").email("eddy@valfam.co.uk").build(),
+                Contact.builder().id(nextUUID()).firstName("Bram").surname("Janssens").email("s.a.janssens@gmail.com")
+                        .laptop(Laptop.builder().brand("DELL").id(nextUUID()).price(813.98).build()).build()
         );
 
         this.contacts = contacts.stream().collect(toMap(Contact::getId, c -> c));
@@ -67,4 +64,6 @@ public class ContactDaoMock extends Dao<Contact> {
     }
 
     private String nextId() { return ++maxId + ""; }
+
+    private String nextUUID() { return UUID.randomUUID().toString(); }
 }
