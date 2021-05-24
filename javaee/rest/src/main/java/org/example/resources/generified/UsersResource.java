@@ -74,10 +74,8 @@ public class UsersResource extends Resource<User> implements JsonResource {
             String token = issueToken(login);
             user.setToken(token);
 
-            // return Response.ok().header(AUTHORIZATION, "Bearer " + token)./*entity(u).*/build();
             return user;
         } catch (Exception e) {
-            // return Response.status(UNAUTHORIZED).build();
             throw new NotAuthorizedException("User " + u + " is not authorized.");
         }
     }

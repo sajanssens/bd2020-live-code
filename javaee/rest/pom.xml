@@ -17,6 +17,18 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.6.0.Final</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
@@ -42,20 +54,20 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
         </dependency>
+        <!-- 0. Arquillian BOM  -->
+        <!--see dependencyManagement-->
+
         <!-- 1. Arquillian JUnit integration framework (required at all times) -->
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <version>1.6.0.Final</version>
-            <scope>test</scope>
         </dependency>
+
         <!-- 2. Arquillian container adapter for the target container-->
         <!-- container can be either: embedded, managed or remote -->
         <dependency>
             <groupId>io.openliberty.arquillian</groupId>
             <artifactId>arquillian-liberty-managed</artifactId>
-            <version>1.0.6</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- use this when com.sun classes not found : -->
