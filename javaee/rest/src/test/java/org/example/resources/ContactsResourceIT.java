@@ -49,7 +49,8 @@ public class ContactsResourceIT {
                 .addClass(Dao.class)
                 .addClass(ContactDaoDB.class)
                 .addAsWebInfResource("test-beans.xml", "beans.xml")
-                .addAsResource("test-persistence.xml", "META-INF/persistence.xml");
+                .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+                ;
 
         System.out.println(archive.toString(true));
         return archive;

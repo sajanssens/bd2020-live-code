@@ -67,12 +67,13 @@ public class UsersResource extends Resource<User> implements JsonResource {
     @POST @Path("/login")
     public User login(User u) {
         try {
-            String login = u.getUsername();
+            String username = u.getUsername();
             String password = u.getPassword();
 
-            User user = getDao().authenticate(login, password);
-            String token = issueToken(login);
-            user.setToken(token);
+            User user = getDao().authenticate(username, password);
+            String jwt = issueToken(username);
+            user.setToken(jwt);
+            u.setPassword("");
 
             return user;
         } catch (Exception e) {
@@ -80,17 +81,17 @@ public class UsersResource extends Resource<User> implements JsonResource {
         }
     }
 
-    private String issueToken(String login) {
-        Key key = keyGenerator.generateKey();
-        String jwtToken = Jwts.builder()
-                .setSubject(login)
+    private String issueToken(String username) {
+        Key password = keyGenerator.generateKey();
+        String jwt = Jwts.builder()
+                .setSubject(username)
                 .setIssuer(uriInfo.getAbsolutePath().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(toDate(now().plusMinutes(15L)))
-                .signWith(SignatureAlgorithm.HS512, key)
+                .signWith(SignatureAlgorithm.HS512, password)
                 .compact();
-        log.info("#### generating token for a key : " + jwtToken + " - " + key);
-        return jwtToken;
+        log.info("#### generated token: " + jwt);
+        return jwt;
     }
 
     private Date toDate(LocalDateTime localDateTime) {

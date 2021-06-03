@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 @Provider
 @Authorized
 @Priority(Priorities.AUTHENTICATION)
-public class JWTTokenNeededFilter implements ContainerRequestFilter {
+public class AuthorizationNeeded implements ContainerRequestFilter {
 
     @Inject
     private Logger logger;

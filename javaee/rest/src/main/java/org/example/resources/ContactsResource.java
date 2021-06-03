@@ -16,6 +16,7 @@ public class ContactsResource implements JsonResource {
     @Inject
     private ContactDaoDB dao;
 
+    @Authorized
     @GET
     public Collection<Contact> getAll(@QueryParam("q") String q) {
         return q == null ? dao.getAll() : dao.get(q);
