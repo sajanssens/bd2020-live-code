@@ -68,6 +68,7 @@
         <dependency>
             <groupId>io.openliberty.arquillian</groupId>
             <artifactId>arquillian-liberty-managed</artifactId>
+            <version>1.0.6</version>
         </dependency>
 
         <!-- use this when com.sun classes not found : -->
