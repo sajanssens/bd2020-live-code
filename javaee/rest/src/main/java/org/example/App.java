@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.util.PasswordUtils;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 

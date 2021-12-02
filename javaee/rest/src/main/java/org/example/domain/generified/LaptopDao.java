@@ -5,6 +5,6 @@ import org.example.domain.Laptop;
 import javax.ejb.Stateless;
 
 @Stateless
-public class LaptopDaoDB extends Dao<Laptop> {
+public class LaptopDao extends Dao<Laptop> {
 
 }

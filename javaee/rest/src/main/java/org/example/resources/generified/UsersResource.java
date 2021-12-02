@@ -49,7 +49,7 @@ public class UsersResource extends Resource<User> implements JsonResource {
             String login = u.getUsername();
             String password = u.getPassword();
 
-            getDao().authenticate(login, password);
+            getDao().findByUsernameAndPassword(login, password);
             String token = issueToken(login);
             u.setToken(token);
             u.setPassword("");
@@ -64,13 +64,20 @@ public class UsersResource extends Resource<User> implements JsonResource {
         }
     }
 
+
+    @POST
+    public User register(User u) {
+        getDao().add(u);
+        return u;
+    }
+
     @POST @Path("/login")
     public User login(User u) {
         try {
             String username = u.getUsername();
             String password = u.getPassword();
 
-            User user = getDao().authenticate(username, password);
+            User user = getDao().findByUsernameAndPassword(username, password);
             String jwt = issueToken(username);
             user.setToken(jwt);
             u.setPassword("");

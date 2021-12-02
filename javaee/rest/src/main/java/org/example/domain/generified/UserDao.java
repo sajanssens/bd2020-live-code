@@ -9,13 +9,13 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class UserDao extends Dao<User> {
 
-    public User authenticate(String login, String password) {
+    public User findByUsernameAndPassword(String login, String password) {
         TypedQuery<User> query = em.createNamedQuery(User.FIND_BY_LOGIN_PASSWORD, User.class);
         query.setParameter("login", login);
         query.setParameter("password", PasswordUtils.digestPassword(password));
         User user = query.getSingleResult();
 
-        if (user == null) throw new SecurityException("Invalid user/password");
+
 
         return user;
     }
